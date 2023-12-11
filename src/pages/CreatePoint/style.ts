@@ -109,3 +109,11 @@ export const CreateButton = styled.button`
   }
 `;
 
+export const FileInputWrapper = styled.div`
+  margin-top: 15px;
+`;
+
+export const FileInput = styled.input`
+  margin-top: 5px;
+`;
+

@@ -13,6 +13,8 @@ const CreateEcoPoint = () => {
     glass: false,
     organic: false,
     electronic: false,
+    image: null,
+    user: '6574c7b396631c6b720d7914', // O ID do usuário deve vir aqui.
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -22,11 +24,46 @@ const CreateEcoPoint = () => {
     });
   };
 
+  // Função para lidar com a mudança do input de arquivo
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files && e.target.files[0];
+  
+    setFormData((prevData) => ({
+      ...prevData,
+      image: selectedFile !== undefined ? selectedFile : null,
+    } as typeof prevData));
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
+  
+    const formDataWithImage = new FormData();
+    formDataWithImage.append('name', formData.name);
+    formDataWithImage.append('latitude', formData.latitude);
+    formDataWithImage.append('longitude', formData.longitude);
+    formDataWithImage.append('metal', String(formData.metal));
+    formDataWithImage.append('plastic', String(formData.plastic));
+    formDataWithImage.append('paper', String(formData.paper));
+    formDataWithImage.append('glass', String(formData.glass));
+    formDataWithImage.append('organic', String(formData.organic));
+    formDataWithImage.append('electronic', String(formData.electronic));
+    formDataWithImage.append('user', String(formData.user));
+  
+    if (formData.image !== null) {
+      formDataWithImage.append('image', formData.image);
+    }
+  
     try {
-      const response = await axios.post('http://localhost:3001/ecopoint', formData);
+      alert("entrou");
+      const response = await axios.post('http://localhost:3001/ecopoint', formDataWithImage, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          // O token tem que vir abaixo.
+          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzRjN2IzOTY2MzFjNmI3MjBkNzkxNCIsImlhdCI6MTcwMjI2NjEyOCwiZXhwIjoxNzAyMzUyNTI4fQ.tdk5zQ5Mt5r9RaNdswMxFQJbZYXpdyDYcwaNvAG8GJY'
+        },
+      });
+      
+      alert(response.data);
 
       if (response.data) {
         alert('Eco ponto criado com sucesso!');
@@ -35,13 +72,14 @@ const CreateEcoPoint = () => {
       }
     } catch (error) {
       console.error('Erro ao fazer a requisição:', error);
-      alert('Erro ao criar o eco ponto. Por favor, tente novamente mais tarde.');
+      alert('Erro ao criar o eco ponto. Por favor, tente novamente mais tarde.' + error);
     }
   };
 
   const handleGoBack = () => {
     // Adicionar a lógica para voltar (por exemplo, usando o react-router-dom)
     console.log('Voltar');
+    alert('Voltar');
   };
 
   return (
@@ -86,6 +124,11 @@ const CreateEcoPoint = () => {
           <input type="checkbox" name="electronic" checked={formData.electronic} onChange={handleChange} />
           Eletrônico
         </S.CheckboxLabel>
+
+        <S.FileInputWrapper>
+          <S.Label>Foto:</S.Label>
+          <S.FileInput type="file" name="image" accept="image/*" onChange={handleFileChange} />
+        </S.FileInputWrapper>
 
         <S.ButtonWrapper>
           <S.BackButton onClick={handleGoBack}>Voltar</S.BackButton>

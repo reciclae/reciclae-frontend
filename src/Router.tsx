@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import {} from "./pages";
 
+import {About} from "./pages/About/index";
 import CreatePoint from "./pages/CreatePoint/index";
 
 export function Router() {

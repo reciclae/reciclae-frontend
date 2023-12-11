@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import * as S from './styles';
+import * as S from './style';
 
 const CreateEcoPoint = () => {
   const [formData, setFormData] = useState({

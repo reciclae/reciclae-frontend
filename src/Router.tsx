@@ -17,7 +17,7 @@ export function Router() {
         <Route path="/point/create" element={<CreatePoint/>} />
         <Route path="/point/edit" element={<h1>Edit point</h1>} />
         <Route path="/point/delete" element={<h1>Delete point</h1>} />
-        <Route path="/about" element={<h1>About</h1>} />
+        <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>
   )

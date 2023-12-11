@@ -19,6 +19,8 @@ export const GlobalStyle = createGlobalStyle`
     --cancel: #fe4b4b;
     --bright: #ffffff;
     --dark: #1b1b1b;
+    --tablet-bp: 700px;
+    --laptop-bp: 1400px;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;

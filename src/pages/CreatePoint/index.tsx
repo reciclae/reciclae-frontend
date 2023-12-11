@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
 
-const CreateEcoPoint = () => {
+export const CreatePoint = () => {
   const [formData, setFormData] = useState({
     name: '',
     latitude: '',
@@ -138,5 +138,3 @@ const CreateEcoPoint = () => {
     </S.CreateEcoPointWrapper>
   );
 };
-
-export default CreateEcoPoint;

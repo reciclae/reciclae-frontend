@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
 
-const UpdateUser = () => {
+export const EditUser = () => {
   const [formData, setFormData] = useState({
     userName: '',
     password: '',
@@ -96,5 +96,3 @@ const UpdateUser = () => {
     </S.UpdateUserWrapper>
   );
 };
-
-export default UpdateUser;

@@ -1,3 +1,8 @@
 import { About } from "./About";
+import { EditPoint } from "./EditPoint";
 
-export { About };
+export { 
+    About, 
+    EditPoint
+
+};

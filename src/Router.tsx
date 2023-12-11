@@ -5,6 +5,7 @@ import {About} from "./pages/About/index";
 import CreatePoint from "./pages/CreatePoint/index";
 import { EditPoint } from "./pages";
 import { DeleteUser } from "./pages";
+import { DeletePoint } from "./pages";
 
 export function Router() {
   return (
@@ -19,7 +20,7 @@ export function Router() {
         <Route path="/map" element={<h1>Map</h1>} />
         <Route path="/point/create" element={<CreatePoint/>} />
         <Route path="/point/edit" element={<EditPoint />} />
-        <Route path="/point/delete" element={<h1>Delete point</h1>} />
+        <Route path="/point/delete" element={<DeletePoint />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>

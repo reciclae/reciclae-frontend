@@ -76,10 +76,10 @@ const CreateEcoPoint = () => {
     }
   };
 
-  const handleGoBack = () => {
+  const handleGoBack = (e: React.MouseEvent) => {
+    e.preventDefault();    
     // Adicionar a lógica para voltar (por exemplo, usando o react-router-dom)
     console.log('Voltar');
-    alert('Voltar');
   };
 
   return (

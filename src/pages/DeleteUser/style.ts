@@ -2,9 +2,13 @@ import styled from "styled-components";
 import { Link as RouterLink } from "react-router-dom";
 
 export const Container = styled.div`
-  max-width: 680px;
-  margin: 8rem auto;
+  max-width: 600px;
+  margin: 2rem auto;
   text-align: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 `;
 
 export const Title = styled.h1`
@@ -43,15 +47,19 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  padding: .5em 1em;
+  padding: .5em 5em;
   border-radius: .5em;
-  margin: 1rem;
+  margin: 0 auto;
   color: var(--bright);
   background-color: var(--cancel);
   cursor: pointer;
 `;
 
 export const Link = styled(RouterLink)`
-  font-weight: bold;
-  text-decoration: underline;
+padding: .5em 5em;
+border-radius: .5em;
+margin: 0 auto;
+color: var(--bright);
+background-color: #000000;
+cursor: pointer;
 `;

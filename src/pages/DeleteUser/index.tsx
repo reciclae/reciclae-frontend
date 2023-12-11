@@ -50,7 +50,7 @@ export function DeleteUser() {
           placeholder="Senha"
         />
         <Button onClick={handleSubmit}>Deletar</Button>
-      </Form>
+      </Form><br />
       <Link to="/user">Voltar</Link>
     </Container>
   )

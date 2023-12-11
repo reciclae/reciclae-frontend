@@ -41,7 +41,7 @@ export function DeletePoint() {
         <Text>{point.longitude}</Text>
       </UserContainer>
       <Paragraph>
-        Tem certeza que deseja <span style={{color: "var(--cancel)"}}>excluir</span> esse ponto?
+        Tem certeza que deseja apagar esse ponto?
       </Paragraph>
       <Form>
         <Input
@@ -51,7 +51,7 @@ export function DeletePoint() {
           placeholder="Senha"
         />
         <Button onClick={handleSubmit}>Deletar</Button>
-      </Form>
+      </Form><br />
       <Link to="/user">Voltar</Link>
     </Container>
   )

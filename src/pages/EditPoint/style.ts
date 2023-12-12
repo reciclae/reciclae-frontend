@@ -15,12 +15,22 @@ export const Label = styled.label`
   color: var(--secondary);
 `;
 
-export const ImageInput = styled.input`
-  padding: .5rem 1rem;
-  border-radius: .5rem;
-  box-shadow: 0 .25rem .25rem rgba(0, 0, 0, .1);
-  background-color: rgba(59, 59, 59, .5);
-  aspect-ratio: 4 / 3;
+export const FileInputWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 2px;
+`;
+
+export const FileInput = styled.input`
+  margin-top: 5px;
+  margin-bottom: 20px;
+`;
+
+export const ImagePreview = styled.img`
+  max-width: 100%;
+  max-height: 200px;
+  margin-top: 10px;
 `;
 
 export const TextInput = styled.input`

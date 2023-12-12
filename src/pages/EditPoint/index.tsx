@@ -8,7 +8,9 @@ import {
   Container,
   Form,
   Label,
-  ImageInput,
+  FileInputWrapper,
+  FileInput,
+  ImagePreview,
   TextInput,
   Options,
   BackLink,
@@ -24,11 +26,25 @@ export function EditPoint() {
     management: "Reciclagem"
   };
 
-  const [picture, setPicture] = useState("");
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [name, setName] = useState(point.name);
   const [time, setTime] = useState(point.time);
   const [type, setType] = useState(point.type);
   const [management, setManagement] = useState(point.management);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFile = e.target.files && e.target.files[0];
+  
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setImagePreview(null);
+    }
+  };
 
   const handleSubmit = () => {};
 
@@ -36,8 +52,10 @@ export function EditPoint() {
     <Container>
       <Header />
       <Form>
-        <Label htmlFor="picture">Imagem do local de coleta:</Label>
-        <ImageInput id="picture" type="image" />
+        <FileInputWrapper>
+            <ImagePreview src={imagePreview ?? "https://i0.wp.com/saojose.sc.gov.br/wp-content/uploads/2022/02/ecoponto-forquilhinha-scaled.jpg?fit=1920%2C1280&ssl=1"} alt="Image Preview" />
+            <FileInput type="file" name="image" accept="image/*" onChange={handleFileChange} />
+        </FileInputWrapper>
         <Label htmlFor="name">Nome do local de coleta:</Label>
         <TextInput
           id="name"

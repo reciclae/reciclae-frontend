@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-import { Title, Input, Button } from "../../components";
+import { Title, Input, Button, Link } from "../../components";
 
 import {
   Container,
   Form,
   FormFooter,
-  Link,
   Text
 } from "./style";
 

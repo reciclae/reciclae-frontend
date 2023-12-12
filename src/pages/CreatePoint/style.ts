@@ -8,7 +8,7 @@ export const CreateEcoPointWrapper = styled.div`
 `;
 
 export const Form = styled.form`
-  max-width: 400px;
+  max-width: 500px;
   width: 100%;
   padding: 20px;
   background-color: #fff;
@@ -28,6 +28,7 @@ export const Label = styled.label`
   font-size: 16px;
   color: #555;
   margin-bottom: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 `;
 
 export const Input = styled.input`
@@ -110,10 +111,20 @@ export const CreateButton = styled.button`
 `;
 
 export const FileInputWrapper = styled.div`
-  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 2px;
 `;
 
 export const FileInput = styled.input`
   margin-top: 5px;
+  margin-bottom: 20px;
+`;
+
+export const ImagePreview = styled.img`
+  max-width: 100%;
+  max-height: 200px;
+  margin-top: 10px;
 `;
 

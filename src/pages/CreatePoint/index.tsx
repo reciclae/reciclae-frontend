@@ -2,8 +2,23 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
 
+import {Header} from '../../components/Header/index';
+import {Footer} from '../../components/Footer/index';
+
 export const CreatePoint = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    name: string;
+    latitude: string;
+    longitude: string;
+    metal: boolean;
+    plastic: boolean;
+    paper: boolean;
+    glass: boolean;
+    organic: boolean;
+    electronic: boolean;
+    image: File | null;
+    user: string;
+  }>({
     name: '',
     latitude: '',
     longitude: '',
@@ -14,8 +29,11 @@ export const CreatePoint = () => {
     organic: false,
     electronic: false,
     image: null,
-    user: '6574c7b396631c6b720d7914', // O ID do usuário deve vir aqui.
+    user: '6574c7b396631c6b720d7914',
   });
+  
+
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -24,15 +42,26 @@ export const CreatePoint = () => {
     });
   };
 
-  // Função para lidar com a mudança do input de arquivo
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files && e.target.files[0];
   
     setFormData((prevData) => ({
       ...prevData,
       image: selectedFile !== undefined ? selectedFile : null,
-    } as typeof prevData));
+    }));
+  
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setImagePreview(null);
+    }
   };
+  
+  
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,7 +83,6 @@ export const CreatePoint = () => {
     }
   
     try {
-      alert("entrou");
       const response = await axios.post('http://localhost:3001/ecopoint', formDataWithImage, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -63,8 +91,6 @@ export const CreatePoint = () => {
         },
       });
       
-      alert(response.data);
-
       if (response.data) {
         alert('Eco ponto criado com sucesso!');
       } else {
@@ -83,9 +109,17 @@ export const CreatePoint = () => {
   };
 
   return (
+    <>
+    <Header/>
     <S.CreateEcoPointWrapper>
       <S.Form onSubmit={handleSubmit}>
         <S.Title>Criar Eco Ponto</S.Title>
+
+        <S.FileInputWrapper>
+          <S.ImagePreview src={imagePreview ?? "https://st3.depositphotos.com/17828278/33150/v/450/depositphotos_331503262-stock-illustration-no-image-vector-symbol-missing.jpg"} alt="Image Preview" />
+          <S.FileInput type="file" name="image" accept="image/*" onChange={handleFileChange} />
+        </S.FileInputWrapper>
+
         <S.Label>Nome:</S.Label>
         <S.Input type="text" name="name" value={formData.name} onChange={handleChange} />
 
@@ -123,12 +157,7 @@ export const CreatePoint = () => {
         <S.CheckboxLabel>
           <input type="checkbox" name="electronic" checked={formData.electronic} onChange={handleChange} />
           Eletrônico
-        </S.CheckboxLabel>
-
-        <S.FileInputWrapper>
-          <S.Label>Foto:</S.Label>
-          <S.FileInput type="file" name="image" accept="image/*" onChange={handleFileChange} />
-        </S.FileInputWrapper>
+        </S.CheckboxLabel>        
 
         <S.ButtonWrapper>
           <S.BackButton onClick={handleGoBack}>Voltar</S.BackButton>
@@ -136,5 +165,7 @@ export const CreatePoint = () => {
         </S.ButtonWrapper>
       </S.Form>
     </S.CreateEcoPointWrapper>
+    <Footer/>
+    </>
   );
 };

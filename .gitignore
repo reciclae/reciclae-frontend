@@ -1,3 +1,6 @@
+# Dotenv
+.env
+
 # Logs
 logs
 *.log

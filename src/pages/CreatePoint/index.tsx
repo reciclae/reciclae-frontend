@@ -102,12 +102,6 @@ export const CreatePoint = () => {
     }
   };
 
-  const handleGoBack = (e: React.MouseEvent) => {
-    e.preventDefault();    
-    // Adicionar a lógica para voltar (por exemplo, usando o react-router-dom)
-    console.log('Voltar');
-  };
-
   return (
     <>
     <Header/>
@@ -160,7 +154,7 @@ export const CreatePoint = () => {
         </S.CheckboxLabel>        
 
         <S.ButtonWrapper>
-          <S.BackButton onClick={handleGoBack}>Voltar</S.BackButton>
+          <S.Link to='/map'>Voltar</S.Link>
           <S.CreateButton type="submit">Criar Eco Ponto</S.CreateButton>
         </S.ButtonWrapper>
       </S.Form>

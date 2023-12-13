@@ -1,10 +1,12 @@
 import styled from 'styled-components';
+import { Link as RouterLink } from "react-router-dom";
 
 export const CreateEcoPointWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 30px;
+  padding-bottom: 80px;
 `;
 
 export const Form = styled.form`
@@ -80,7 +82,7 @@ export const ButtonWrapper = styled.div`
   margin-top: 20px;
 `;
 
-export const BackButton = styled.button`
+export const Link = styled(RouterLink)`
   background-color: #333;
   color: #fff;
   padding: 12px;

@@ -1,14 +1,15 @@
 import styled from 'styled-components';
+import { Link as RouterLink } from "react-router-dom";
 
 export const UpdateUserWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;
+  margin-top: 30px;
 `;
 
 export const Form = styled.form`
-  max-width: 400px;
+  max-width: 500px;
   width: 100%;
   padding: 20px;
   background-color: #fff;
@@ -28,6 +29,7 @@ export const Label = styled.label`
   font-size: 16px;
   color: #555;
   margin-bottom: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 `;
 
 export const Input = styled.input`
@@ -46,40 +48,13 @@ export const Input = styled.input`
   }
 `;
 
-export const CheckboxLabel = styled.label`
-  display: flex;
-  align-items: center;
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 15px;
-
-  input {
-    margin-right: 8px;
-  }
-`;
-
-export const Button = styled.button`
-  background-color: #4caf50;
-  color: #fff;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #45a049;
-  }
-`;
-
 export const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
 `;
 
-export const BackButton = styled.button`
+export const Link = styled(RouterLink)`
   background-color: #333;
   color: #fff;
   padding: 12px;
@@ -110,10 +85,20 @@ export const CreateButton = styled.button`
 `;
 
 export const FileInputWrapper = styled.div`
-  margin-top: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 2px;
 `;
 
 export const FileInput = styled.input`
   margin-top: 5px;
+  margin-bottom: 20px;
+`;
+
+export const ImagePreview = styled.img`
+  max-width: 100%;
+  max-height: 200px;
+  margin-top: 10px;
 `;
 

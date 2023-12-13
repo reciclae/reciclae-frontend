@@ -2,14 +2,25 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
 
+import {Header} from '../../components/Header/index';
+import {Footer} from '../../components/Footer/index';
+
 export const EditUser = () => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<{
+    userName: string;
+    password: string;
+    confirmPassword: string;
+    image: File | null;
+    user: string;
+  }>({
     userName: '',
     password: '',
     confirmPassword: '',
     image: null,
     user: '6574c7b396631c6b720d7914', // O ID do usuário deve vir aqui.
   });
+
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
 
   // Função para lidar com a mudança do input de arquivo
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +29,17 @@ export const EditUser = () => {
     setFormData((prevData) => ({
       ...prevData,
       image: selectedFile !== undefined ? selectedFile : null,
-    } as typeof prevData));
+    }));
+  
+    if (selectedFile) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(selectedFile);
+    } else {
+      setImagePreview(null);
+    }
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -42,7 +63,6 @@ export const EditUser = () => {
     }
   
     try {
-      alert("entrou");
       const response = await axios.put('http://localhost:3001/user/' + String(formData.user), formDataWithImage, {
         headers: {
           'Content-Type': 'multipart/form-data',
@@ -51,8 +71,6 @@ export const EditUser = () => {
         },
       });
       
-      alert(response.data);
-
       if (response.data) {
         alert('Usuário atualizado com sucesso!');
       } else {
@@ -64,35 +82,34 @@ export const EditUser = () => {
     }
   };
 
-  const handleGoBack = (e: React.MouseEvent) => {
-    e.preventDefault();    
-    // Adicionar a lógica para voltar (por exemplo, usando o react-router-dom)
-    console.log('Voltar');
-  };
-
   return (
+    <>
+    <Header/>
     <S.UpdateUserWrapper>
       <S.Form onSubmit={handleSubmit}>
         <S.Title>Atualizar usuário</S.Title>
-        <S.Label>Nome de usuário:</S.Label>
-        <S.Input type="text" name="userName" value={formData.userName} onChange={handleChange} />
-
-        <S.Label>Latitude:</S.Label>
-        <S.Input type="password" name="password" value={formData.password} onChange={handleChange} />
-
-        <S.Label>Longitude:</S.Label>
-        <S.Input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
 
         <S.FileInputWrapper>
-          <S.Label>Foto:</S.Label>
+          <S.ImagePreview src={imagePreview ?? "https://st3.depositphotos.com/17828278/33150/v/450/depositphotos_331503262-stock-illustration-no-image-vector-symbol-missing.jpg"} alt="Image Preview" />
           <S.FileInput type="file" name="image" accept="image/*" onChange={handleFileChange} />
         </S.FileInputWrapper>
 
+        <S.Label>Nome de usuário:</S.Label>
+        <S.Input type="text" name="userName" value={formData.userName} onChange={handleChange} />
+
+        <S.Label>Senha:</S.Label>
+        <S.Input type="password" name="password" value={formData.password} onChange={handleChange} />
+
+        <S.Label>Confirme a senha:</S.Label>
+        <S.Input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
+
         <S.ButtonWrapper>
-          <S.BackButton onClick={handleGoBack}>Voltar</S.BackButton>
+          <S.Link to="/user">Voltar</S.Link>
           <S.CreateButton type="submit">Atualizar</S.CreateButton>
         </S.ButtonWrapper>
       </S.Form>
     </S.UpdateUserWrapper>
+    <Footer/>
+    </>
   );
 };

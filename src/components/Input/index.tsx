@@ -1,35 +1,34 @@
-import React from "react";
+import { FieldValues, FieldPath, UseFormRegister, FieldError } from "react-hook-form";
 
-import { Container, Label, Content } from "./style";
+import { Container, Label, Content, Warning } from "./style";
 
-interface Props {
-  name?: string,
+interface Props<FormData extends FieldValues> {
+  name: FieldPath<FormData>,
   type: string,
   label?: string,
   placeholder?: string,
-  onChange?: React.ChangeEventHandler<HTMLInputElement>,
-  value?: string
+  register: UseFormRegister<FormData>,
+  error?: FieldError
 }
 
-export function Input({
+export function Input<FormData extends FieldValues>({
   name,
   type,
   label,
   placeholder,
-  onChange,
-  value
-}: Props) {
+  register,
+  error
+}: Props<FormData>) {
   return (
     <Container>
       { label && <Label htmlFor={name}>{label}</Label> }
       <Content
         id={name}
-        name={name}
         type={type}
         placeholder={placeholder}
-        onChange={onChange}
-        value={value}
+        {...register(name)}
       />
+      { error && <Warning>{error.message}</Warning> }
     </Container>
   );
 }

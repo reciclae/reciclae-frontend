@@ -16,3 +16,8 @@ export const Content = styled.input`
   border-radius: .5rem;
   box-shadow: 0 .1rem .5rem .25rem rgba(0, 0, 0, .1);
 `;
+
+export const Warning = styled.span`
+  font-size: .8rem;
+  color: var(--cancel);
+`;

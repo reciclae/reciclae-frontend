@@ -1,8 +1,11 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { AuthContext } from "../../context/AuthContext";
 import { api } from "../../api";
+import { schema, FormData } from "./form";
 
 import { Title, Input, Button, Link } from "../../components";
 
@@ -17,72 +20,72 @@ export function Signup() {
   const { user, login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [verifyPassword, setVerifyPassword] = useState("");
+  const {register, handleSubmit, formState: {errors}} = useForm<FormData>({
+    resolver: zodResolver(schema)
+  });
 
   useEffect(() => {
     if(user) navigate("/");
   }, [user]);
 
-  // TODO: tratar "fields missing"
-  // TODO: tratar "user already registered"
-  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async e => {
-    e.preventDefault();
-
+  const submit = async ({
+    userName,
+    email,
+    password,
+    confirmPassword
+  }: FormData) => {
     try {
       await api.post("signin", {
-        userName: name,
+        userName,
         email,
         password,
-        confirmPassword: verifyPassword
+        confirmPassword
       });
 
       await login(email, password);
     } catch(err) {
       console.log(err)
     }
-  };
+  }
 
   return (
     <Container>
       <Title>Cadastro</Title>
-      <Form>
-        <Input
+      <Form onSubmit={handleSubmit(submit)}>
+        <Input<FormData>
           label="Nome de usuário:"
-          name="username"
+          name="userName"
           type="text"
           placeholder="Nome de usuário"
-          value={name}
-          onChange={e => setName(e.target.value)}
+          register={register}
+          error={errors.userName}
         />
-        <Input
+        <Input<FormData>
           label="Email:"
           name="email"
-          onChange={e => setEmail(e.target.value)}
-          value={email}
           type="email"
           placeholder="Email"
+          register={register}
+          error={errors.email}
         />
-        <Input
+        <Input<FormData>
           label="Senha:"
           name="password"
-          onChange={e => setPassword(e.target.value)}
-          value={password}
           type="password"
           placeholder="Senha"
+          register={register}
+          error={errors.password}
         />
-        <Input
+        <Input<FormData>
           label="Confirme sua senha:"
-          name="verifyPassword"
-          onChange={e => setVerifyPassword(e.target.value)}
-          value={verifyPassword}
+          name="confirmPassword"
           type="password"
           placeholder="Confirmar senha"
+          register={register}
+          error={errors.confirmPassword}
         />
 
-        <Button onClick={handleSubmit}>Cadastrar</Button>
+        <Button>Cadastrar</Button>
       </Form>
       <FormFooter>
         <Text>Já é usuário da plataforma?</Text>

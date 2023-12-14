@@ -46,7 +46,9 @@ export const Logout = styled.button`
   cursor: pointer;
 `;
 
-export const UserPicture = styled.img``;
+export const UserPicture = styled.img`
+  width: 2rem;
+`;
 
 export const Signup = styled(RouterLink)``;
 

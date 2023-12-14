@@ -1,7 +1,6 @@
 import { useContext } from "react";
 
 import logo from "../../assets/logo.png";
-import userPic from "../../assets/user.png";
 
 import { AuthContext } from "../../context/AuthContext";
 
@@ -39,8 +38,11 @@ export function Header() {
               <Username>{user.username}</Username>
               <Logout onClick={logout}>Logout</Logout>
             </UserTextContainer>
-            {/* TODO: pegar a imagem do usuário correta */}
-            <UserPicture src={userPic} alt="Foto do usuário" title="Foto do usuário" />
+            <UserPicture
+              src={`http://localhost:3001/upload/${user.avatar}`}
+              alt="Foto do usuário"
+              title="Foto do usuário"
+            />
           </> :
           <>
             <Signup to="/signup">Cadastrar</Signup>

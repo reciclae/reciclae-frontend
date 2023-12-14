@@ -7,7 +7,7 @@ import { AuthContext } from "../../context/AuthContext";
 import { api } from "../../api";
 import { schema, FormData } from "./form";
 
-import { Title, Input, Button, Link } from "../../components";
+import { Header, Title, Input, Button, Link, Footer } from "../../components";
 
 import {
   Container,
@@ -50,8 +50,10 @@ export function Signup() {
 
   return (
     <Container>
-      <Title>Cadastro</Title>
+      <Header />
       <Form onSubmit={handleSubmit(submit)}>
+        <Title>Cadastro</Title>
+
         <Input<FormData>
           label="Nome de usuário:"
           name="userName"
@@ -86,11 +88,13 @@ export function Signup() {
         />
 
         <Button>Cadastrar</Button>
+
+        <FormFooter>
+          <Text>Já é usuário da plataforma?</Text>
+          <Link to="/login">Faça login</Link>
+        </FormFooter>
       </Form>
-      <FormFooter>
-        <Text>Já é usuário da plataforma?</Text>
-        <Link to="/login">Faça login</Link>
-      </FormFooter>
+      <Footer />
     </Container>
   )
 }

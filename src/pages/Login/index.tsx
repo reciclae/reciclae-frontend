@@ -6,7 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { AuthContext } from "../../context/AuthContext";
 import { schema, FormData } from "./form";
 
-import { Title, Input, Button, Link } from "../../components";
+import { Header, Title, Input, Button, Link, Footer } from "../../components";
 
 import {
   Container,
@@ -40,8 +40,10 @@ export function Login() {
 
   return (
     <Container>
-      <Title>Login</Title>
+      <Header />
       <Form onSubmit={handleSubmit(submit)}>
+        <Title>Login</Title>
+
         <Input<FormData>
           label="Email:"
           name="email"
@@ -60,11 +62,13 @@ export function Login() {
         />
 
         <Button>Entrar</Button>
+
+        <FormFooter>
+          <Text>Ainda não é usuário da plataforma?</Text>
+          <Link to="/signup">Cadastre-se</Link>
+        </FormFooter>
       </Form>
-      <FormFooter>
-        <Text>Ainda não é usuário da plataforma?</Text>
-        <Link to="/signup">Cadastre-se</Link>
-      </FormFooter>
+      <Footer />
     </Container>
   )
 }

@@ -30,7 +30,7 @@ export function Login() {
 
   return (
     <Container>
-      <Title>Cadastro</Title>
+      <Title>Login</Title>
       <Form>
         <Input
           label="Email:"

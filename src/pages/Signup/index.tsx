@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../context/AuthContext";
 import { api } from "../../api";
@@ -14,6 +15,7 @@ import {
 
 export function Signup() {
   const { login } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -34,6 +36,8 @@ export function Signup() {
       });
 
       await login(email, password);
+
+      navigate("/");
     } catch(err) {
       console.log(err)
     }

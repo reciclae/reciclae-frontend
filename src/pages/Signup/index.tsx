@@ -1,4 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+
+import { AuthContext } from "../../context/AuthContext";
+import { api } from "../../api";
 
 import { Title, Input, Button, Link } from "../../components";
 
@@ -10,43 +13,66 @@ import {
 } from "./style";
 
 export function Signup() {
+  const { login } = useContext(AuthContext);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
 
-  const handleSubmit = () => {};
+  // TODO: tratar "fields missing"
+  // TODO: tratar "user already registered"
+  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async e => {
+    e.preventDefault();
+
+    try {
+      await api.post("signin", {
+        userName: name,
+        email,
+        password,
+        confirmPassword: verifyPassword
+      });
+
+      await login(email, password);
+    } catch(err) {
+      console.log(err)
+    }
+  };
 
   return (
     <Container>
       <Title>Cadastro</Title>
       <Form>
         <Input
-          label="Nome:"
+          label="Nome de usuário:"
+          name="username"
           type="text"
-          placeholder="Nome"
+          placeholder="Nome de usuário"
           value={name}
           onChange={e => setName(e.target.value)}
         />
         <Input
           label="Email:"
+          name="email"
           onChange={e => setEmail(e.target.value)}
           value={email}
-          type="text"
+          type="email"
           placeholder="Email"
         />
         <Input
           label="Senha:"
+          name="password"
           onChange={e => setPassword(e.target.value)}
           value={password}
-          type="text"
+          type="password"
           placeholder="Senha"
         />
         <Input
           label="Confirme sua senha:"
+          name="verifyPassword"
           onChange={e => setVerifyPassword(e.target.value)}
           value={verifyPassword}
-          type="text"
+          type="password"
           placeholder="Confirmar senha"
         />
 

@@ -42,7 +42,9 @@ export const Username = styled.h4`
   font-weight: bold;
 `;
 
-export const Logout = styled.button``;
+export const Logout = styled.button`
+  cursor: pointer;
+`;
 
 export const UserPicture = styled.img``;
 

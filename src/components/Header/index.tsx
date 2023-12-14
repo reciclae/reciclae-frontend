@@ -1,5 +1,9 @@
+import { useContext } from "react";
+
 import logo from "../../assets/logo.png";
 import userPic from "../../assets/user.png";
+
+import { AuthContext } from "../../context/AuthContext";
 
 import {
   Container,
@@ -17,7 +21,7 @@ import {
 } from "./style";
 
 export function Header() {
-  const user = null;
+  const { user, logout } = useContext(AuthContext);
 
   return (
     <Container>
@@ -32,9 +36,10 @@ export function Header() {
           user ?
           <>
             <UserTextContainer>
-              <Username>Username</Username>
-              <Logout>Logout</Logout>
+              <Username>{user.username}</Username>
+              <Logout onClick={logout}>Logout</Logout>
             </UserTextContainer>
+            {/* TODO: pegar a imagem do usuário correta */}
             <UserPicture src={userPic} alt="Foto do usuário" title="Foto do usuário" />
           </> :
           <>

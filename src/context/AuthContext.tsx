@@ -3,8 +3,8 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 import { api } from "../api";
 
 interface IUser {
-  _id: string,
-  userName: string,
+  id: string,
+  username: string,
   email: string,
   avatar: string
 }

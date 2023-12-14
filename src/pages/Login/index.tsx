@@ -1,7 +1,10 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { AuthContext } from "../../context/AuthContext";
+import { schema, FormData } from "./form";
 
 import { Title, Input, Button, Link } from "../../components";
 
@@ -16,46 +19,47 @@ export function Login() {
   const { user, login } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const {register, handleSubmit, formState: {errors}} = useForm<FormData>({
+    resolver: zodResolver(schema)
+  });
 
   useEffect(() => {
     if(user) navigate("/");
   }, [user]);
 
-  // TODO: tratar "fields missing"
-  const handleSubmit: React.MouseEventHandler<HTMLButtonElement> = async e => {
-    e.preventDefault();
-
+  const submit = async ({
+    email,
+    password
+  }: FormData) => {
     try {
       await login(email, password);
     } catch(err) {
       console.log(err)
     }
-  };
+  }
 
   return (
     <Container>
       <Title>Login</Title>
-      <Form>
-        <Input
+      <Form onSubmit={handleSubmit(submit)}>
+        <Input<FormData>
           label="Email:"
           name="email"
-          onChange={e => setEmail(e.target.value)}
-          value={email}
           type="email"
           placeholder="Email"
+          register={register}
+          error={errors.email}
         />
-        <Input
+        <Input<FormData>
           label="Senha:"
           name="password"
-          onChange={e => setPassword(e.target.value)}
-          value={password}
           type="password"
           placeholder="Senha"
+          register={register}
+          error={errors.password}
         />
 
-        <Button onClick={handleSubmit}>Entrar</Button>
+        <Button>Entrar</Button>
       </Form>
       <FormFooter>
         <Text>Ainda não é usuário da plataforma?</Text>

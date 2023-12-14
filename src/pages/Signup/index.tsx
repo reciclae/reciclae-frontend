@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from "../../context/AuthContext";
@@ -14,13 +14,17 @@ import {
 } from "./style";
 
 export function Signup() {
-  const { login } = useContext(AuthContext);
+  const { user, login } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [verifyPassword, setVerifyPassword] = useState("");
+
+  useEffect(() => {
+    if(user) navigate("/");
+  }, [user]);
 
   // TODO: tratar "fields missing"
   // TODO: tratar "user already registered"
@@ -36,8 +40,6 @@ export function Signup() {
       });
 
       await login(email, password);
-
-      navigate("/");
     } catch(err) {
       console.log(err)
     }

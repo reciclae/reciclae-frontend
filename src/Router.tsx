@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import {
   Signup,
+  Login,
   About,
   EditPoint,
   EditUser,
@@ -18,7 +19,7 @@ export function Router() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/login" element={<h1>Login</h1>} />
+        <Route path="/login" element={<Login />} />
         <Route path="/user" element={<h1>User</h1>} />
         <Route path="/user/edit" element={<EditUser/>} />
         <Route path="/user/delete" element={<DeleteUser />} />

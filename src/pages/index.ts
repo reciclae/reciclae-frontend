@@ -1,4 +1,5 @@
 import { Signup } from "./Signup";
+import { Login } from "./Login";
 import { About } from "./About";
 import { EditPoint } from "./EditPoint";
 import { EditUser } from "./EditUser";
@@ -8,6 +9,7 @@ import { DeletePoint } from "./DeletePoint";
 
 export {
   Signup,
+  Login,
   About, 
   EditPoint,
   EditUser,

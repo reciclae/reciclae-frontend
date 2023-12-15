@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
-
+import { useParams } from 'react-router-dom';
 import {Header} from '../../components/Header/index';
 import {Footer} from '../../components/Footer/index';
 
 export const EditUser = () => {
+  const token = localStorage.getItem("auth.token");
+  const user = localStorage.getItem("auth.user");
   const [formData, setFormData] = useState<{
     userName: string;
     password: string;
@@ -17,7 +19,7 @@ export const EditUser = () => {
     password: '',
     confirmPassword: '',
     image: null,
-    user: '6574c7b396631c6b720d7914', // O ID do usuário deve vir aqui.
+    user: '',
   });
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
@@ -56,7 +58,7 @@ export const EditUser = () => {
     formDataWithImage.append('userName', formData.userName);
     formDataWithImage.append('password', formData.password);
     formDataWithImage.append('confirmPassword', formData.confirmPassword);
-    formDataWithImage.append('user', String(formData.user));
+    formDataWithImage.append('user', user ?? '');
   
     if (formData.image !== null) {
       formDataWithImage.append('image', formData.image);
@@ -67,7 +69,7 @@ export const EditUser = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
           // O token tem que vir abaixo.
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzRjN2IzOTY2MzFjNmI3MjBkNzkxNCIsImlhdCI6MTcwMjI2NjEyOCwiZXhwIjoxNzAyMzUyNTI4fQ.tdk5zQ5Mt5r9RaNdswMxFQJbZYXpdyDYcwaNvAG8GJY'
+          'Authorization': 'Bearer ' + token
         },
       });
       

@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
-
+import { useParams } from 'react-router-dom';
 import {Header} from '../../components/Header/index';
 import {Footer} from '../../components/Footer/index';
 
 export const CreatePoint = () => {
+  const { latitude, longitude } = useParams();
+  const token = localStorage.getItem("auth.token");
+  const user = localStorage.getItem("auth.user");
   const [formData, setFormData] = useState<{
     name: string;
     latitude: string;
@@ -29,7 +32,7 @@ export const CreatePoint = () => {
     organic: false,
     electronic: false,
     image: null,
-    user: '6574c7b396631c6b720d7914',
+    user: '',
   });
   
 
@@ -59,24 +62,22 @@ export const CreatePoint = () => {
     } else {
       setImagePreview(null);
     }
-  };
-  
-  
+  }; 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
   
     const formDataWithImage = new FormData();
     formDataWithImage.append('name', formData.name);
-    formDataWithImage.append('latitude', formData.latitude);
-    formDataWithImage.append('longitude', formData.longitude);
+    formDataWithImage.append('latitude', latitude ?? '');
+    formDataWithImage.append('longitude', longitude ?? '');
     formDataWithImage.append('metal', String(formData.metal));
     formDataWithImage.append('plastic', String(formData.plastic));
     formDataWithImage.append('paper', String(formData.paper));
     formDataWithImage.append('glass', String(formData.glass));
     formDataWithImage.append('organic', String(formData.organic));
     formDataWithImage.append('electronic', String(formData.electronic));
-    formDataWithImage.append('user', String(formData.user));
+    formDataWithImage.append('user', user ?? '');
   
     if (formData.image !== null) {
       formDataWithImage.append('image', formData.image);
@@ -87,7 +88,7 @@ export const CreatePoint = () => {
         headers: {
           'Content-Type': 'multipart/form-data',
           // O token tem que vir abaixo.
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzRjN2IzOTY2MzFjNmI3MjBkNzkxNCIsImlhdCI6MTcwMjI2NjEyOCwiZXhwIjoxNzAyMzUyNTI4fQ.tdk5zQ5Mt5r9RaNdswMxFQJbZYXpdyDYcwaNvAG8GJY'
+          'Authorization': 'Bearer '+ token
         },
       });
       
@@ -116,12 +117,6 @@ export const CreatePoint = () => {
 
         <S.Label>Nome:</S.Label>
         <S.Input type="text" name="name" value={formData.name} onChange={handleChange} />
-
-        <S.Label>Latitude:</S.Label>
-        <S.Input type="text" name="latitude" value={formData.latitude} onChange={handleChange} />
-
-        <S.Label>Longitude:</S.Label>
-        <S.Input type="text" name="longitude" value={formData.longitude} onChange={handleChange} />
 
         <S.CheckboxLabel>
           <input type="checkbox" name="metal" checked={formData.metal} onChange={handleChange} />

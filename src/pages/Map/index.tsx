@@ -21,6 +21,8 @@ export const Map = () => {
     width: '100%',
   };
   const defaultCenter = { lat: -34.603722, lng: -58.381592 };
+  const token = localStorage.getItem("auth.token");
+  const user = localStorage.getItem("auth.user");
 
   const fetchData = async () => {
     try {
@@ -73,7 +75,7 @@ export const Map = () => {
         mapContainerStyle={mapContainerStyle}
         zoom={2}
         center={defaultCenter}
-        onClick={handleMapClick}
+        onClick={user ? handleMapClick : () => {}}
       >
         {ecoPoints.map((ecoPoint, index) => (
           <Marker
@@ -95,9 +97,15 @@ export const Map = () => {
               <h2>{`Eco ponto: ${selectedPoint.name}`}</h2>
               {/* Mostra o botão no modal apenas se não houver um ponto existente */}
               {!ecoPoints.some(point => point.latitude === selectedPoint.latitude && point.longitude === selectedPoint.longitude) && (
-                <button onClick={handleCreateEcoPoint}>
-                  Criar Eco ponto
-                </button>
+                <>
+                {
+                  user && (
+                    <button onClick={handleCreateEcoPoint}>
+                      Criar Eco ponto
+                    </button>
+                  )
+                }
+                </>
               )}
             </div>
           </InfoWindow>

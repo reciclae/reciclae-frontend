@@ -20,7 +20,7 @@ export const Map = () => {
     height: '93vh',
     width: '100%',
   };
-  const defaultCenter = { lat: -34.603722, lng: -58.381592 };
+  const defaultCenter = { lat: -6.88953552075925, lng: -38.54378184892696 };
   const token = localStorage.getItem("auth.token");
   const user = localStorage.getItem("auth.user");
 
@@ -73,7 +73,7 @@ export const Map = () => {
       <Header />
       <GoogleMap
         mapContainerStyle={mapContainerStyle}
-        zoom={2}
+        zoom={16}
         center={defaultCenter}
         onClick={user ? handleMapClick : () => {}}
       >

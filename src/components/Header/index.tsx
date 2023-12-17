@@ -33,21 +33,23 @@ export function Header() {
       <UserContainer>
         {
           user ?
-          <>
-            <UserTextContainer>
-              <Username>{user.username}</Username>
-              <Logout onClick={logout}>Logout</Logout>
-            </UserTextContainer>
-            <UserPicture
-              src={`http://localhost:3001/upload/${user.avatar}`}
-              alt="Foto do usuário"
-              title="Foto do usuário"
-            />
-          </> :
-          <>
-            <Signup to="/signup">Cadastrar</Signup>
-            <Login to="/login">Login</Login>
-          </>
+            <>
+              <UserTextContainer>
+                <Username>{user.username}</Username>
+                <Logout onClick={logout}>Logout</Logout>
+              </UserTextContainer>
+              <Link to="/user">
+                <UserPicture
+                  src={`http://localhost:3001/upload/${user.avatar}`}
+                  alt="Foto do usuário"
+                  title="Foto do usuário"
+                />
+              </Link>
+            </> :
+            <>
+              <Signup to="/signup">Cadastrar</Signup>
+              <Login to="/login">Login</Login>
+            </>
         }
       </UserContainer>
     </Container>

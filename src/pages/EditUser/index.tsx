@@ -4,6 +4,7 @@ import * as S from './style';
 import { useParams } from 'react-router-dom';
 import {Header} from '../../components/Header/index';
 import {Footer} from '../../components/Footer/index';
+import { z, ZodError } from 'zod';
 
 export const EditUser = () => {
   const token = localStorage.getItem("auth.token");

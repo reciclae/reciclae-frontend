@@ -7,7 +7,7 @@ import { DeleteUser } from "./DeleteUser";
 import { CreatePoint } from "./CreatePoint";
 import { DeletePoint } from "./DeletePoint";
 import { SelectPoint } from "./SelectPoint";
-import { User } from "./User"; 
+import { UserProfile } from "./UserProfile"; 
 
 export {
   Signup,
@@ -19,5 +19,5 @@ export {
   CreatePoint,
   DeletePoint,
   SelectPoint,
-  User
+  UserProfile
 };

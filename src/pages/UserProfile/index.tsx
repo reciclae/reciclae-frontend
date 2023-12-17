@@ -29,7 +29,7 @@ const userData = {
 };
 
 
-export function User() {
+export function UserProfile() {
     const token = localStorage.getItem("auth.token");
     const user = localStorage.getItem("auth.user");
     const params = useParams(); // Obtém o ID do usuário da URL

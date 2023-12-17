@@ -10,7 +10,7 @@ import {
   CreatePoint,
   DeletePoint,
   SelectPoint,
-  User
+  UserProfile
 } from "./pages";
 import { HomePage } from "./pages/HomePage";
 import { Map } from "./pages/Map/index";
@@ -22,7 +22,7 @@ export function Router() {
         <Route path="/" element={<HomePage />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/user" element={<User />} />
+        <Route path="/user" element={<UserProfile />} />
         <Route path="/user/edit" element={<EditUser />} />
         <Route path="/user/delete" element={<DeleteUser />} />
         <Route path="/map" element={<Map />} />

@@ -9,6 +9,12 @@ interface EcoPoint {
   name: string;
   latitude: string;
   longitude: string;
+  metal: boolean;
+  plastic: boolean;
+  paper: boolean;
+  glass: boolean;
+  organic: boolean;
+  electronic: boolean;
 }
 
 export const Map = () => {
@@ -28,7 +34,7 @@ export const Map = () => {
     try {
       const response = await axios.get<EcoPoint[]>('http://localhost:3001/ecopoints', {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzRjN2IzOTY2MzFjNmI3MjBkNzkxNCIsImlhdCI6MTcwMjY0NzQ2MSwiZXhwIjoxNzAyNzMzODYxfQ.65t1GnXcb-8YuvnlOEHD6BagXBynpbRvWph00XldnVM'
+          'Authorization': 'Bearer ' + token
         },
       });
       setEcoPoints(response.data);
@@ -51,6 +57,12 @@ export const Map = () => {
       name: "Ponto selecionado",
       latitude: event.latLng.lat().toString(),
       longitude: event.latLng.lng().toString(),
+      metal: false,
+      plastic: false,
+      paper: false,
+      glass: false,
+      organic: false,
+      electronic: false,
     });
 
     // Mostra o modal ao clicar no mapa em um local sem ponto

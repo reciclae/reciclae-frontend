@@ -20,9 +20,10 @@ export const UserContainer = styled.div`
   margin: 1rem;
 `;
 
-export const UserPicture = styled.img`
-  width: 8rem;
-  aspect-ratio: 1 / 1;
+export const PointPicture = styled.img`
+  max-width: 100%;
+  max-height: 200px;
+  margin-top: 10px;
 `;
 
 export const Text = styled.p`
@@ -37,7 +38,8 @@ export const Paragraph = styled.p`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  border-radius: 2px;
 `;
 
 export const Input = styled.input`

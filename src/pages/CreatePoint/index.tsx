@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {Header} from '../../components/Header/index';
 import {Footer} from '../../components/Footer/index';
 
 export const CreatePoint = () => {
+  const navigate = useNavigate();
   const { latitude, longitude } = useParams();
+  const user = JSON.parse(localStorage.getItem("auth.user") || "");
   const token = localStorage.getItem("auth.token");
-  const user = localStorage.getItem("auth.user");
   const [formData, setFormData] = useState<{
     name: string;
     latitude: string;
@@ -34,7 +35,6 @@ export const CreatePoint = () => {
     image: null,
     user: '',
   });
-  
 
   const [imagePreview, setImagePreview] = useState<string | null>(null);
 
@@ -66,7 +66,7 @@ export const CreatePoint = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     const formDataWithImage = new FormData();
     formDataWithImage.append('name', formData.name);
     formDataWithImage.append('latitude', latitude ?? '');
@@ -77,23 +77,23 @@ export const CreatePoint = () => {
     formDataWithImage.append('glass', String(formData.glass));
     formDataWithImage.append('organic', String(formData.organic));
     formDataWithImage.append('electronic', String(formData.electronic));
-    formDataWithImage.append('user', user ?? '');
-  
+    formDataWithImage.append('user', user.id ?? '');
+
     if (formData.image !== null) {
       formDataWithImage.append('image', formData.image);
     }
-  
+
     try {
       const response = await axios.post('http://localhost:3001/ecopoint', formDataWithImage, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          // O token tem que vir abaixo.
-          'Authorization': 'Bearer '+ token
+          'Authorization': 'Bearer ' + token,
         },
       });
       
       if (response.data) {
         alert('Eco ponto criado com sucesso!');
+        navigate(`/map`);
       } else {
         alert('Falha ao criar o eco ponto. Por favor, tente novamente.');
       }
@@ -149,7 +149,9 @@ export const CreatePoint = () => {
         </S.CheckboxLabel>        
 
         <S.ButtonWrapper>
+          <>
           <S.Link to='/map'>Voltar</S.Link>
+          </>
           <S.CreateButton type="submit">Criar Eco Ponto</S.CreateButton>
         </S.ButtonWrapper>
       </S.Form>

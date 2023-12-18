@@ -1,18 +1,115 @@
-import styled from "styled-components";
-import { Link } from "react-router-dom";
+import styled from 'styled-components';
+import { Link as RouterLink } from "react-router-dom";
 
-export const Container = styled.div``;
-
-export const Form = styled.form`
+export const EditEcoPointWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: .5rem;
-  width: fit-content;
-  margin: 2rem auto;
+  align-items: center;
+  margin-top: 30px;
+  padding-bottom: 80px;
+`;
+
+export const Form = styled.form`
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+`;
+
+export const Title = styled.h1`
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  text-align: center;
 `;
 
 export const Label = styled.label`
-  color: var(--secondary);
+  display: block;
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 8px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+
+  &:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
+`;
+
+export const CheckboxLabel = styled.label`
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+
+  input {
+    margin-right: 8px;
+  }
+`;
+
+export const Button = styled.button`
+  background-color: #4caf50;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #45a049;
+  }
+`;
+
+export const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+`;
+
+export const Link = styled(RouterLink)`
+  background-color: #333;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #555;
+  }
+`;
+
+export const CreateButton = styled.button`
+  background-color: #4caf50;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #45a049;
+  }
 `;
 
 export const FileInputWrapper = styled.div`
@@ -33,31 +130,3 @@ export const ImagePreview = styled.img`
   margin-top: 10px;
 `;
 
-export const TextInput = styled.input`
-  padding: .5rem 1rem;
-  border: 1px solid var(--dark);
-  border-radius: .5rem;
-  box-shadow: 0 .25rem .25rem rgba(0, 0, 0, .1);
-`;
-
-export const Options = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-block: 1rem;
-`;
-
-export const BackLink = styled(Link)`
-  padding: .5em 1em;
-  border-radius: .5em;
-  color: var(--bright);
-  background-color: var(--cancel);
-  cursor: pointer;
-`;
-
-export const SubmitButton = styled.button`
-  padding: .5em 1em;
-  border-radius: .5em;
-  color: var(--bright);
-  background-color: var(--primary);
-  cursor: pointer;
-`;

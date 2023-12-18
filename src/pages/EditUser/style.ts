@@ -1,5 +1,20 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 import { Link as RouterLink } from "react-router-dom";
+
+export const Back = styled(RouterLink)`
+  background-color: #333;
+  color: #fff;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: #555;
+  }
+`;
 
 export const UpdateUserWrapper = styled.div`
   display: flex;
@@ -54,20 +69,6 @@ export const ButtonWrapper = styled.div`
   margin-top: 20px;
 `;
 
-export const Link = styled(RouterLink)`
-  background-color: #333;
-  color: #fff;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #555;
-  }
-`;
 
 export const CreateButton = styled.button`
   background-color: #4caf50;

@@ -20,9 +20,10 @@ export const UserContainer = styled.div`
   margin: 1rem;
 `;
 
-export const UserPicture = styled.img`
-  width: 8rem;
-  aspect-ratio: 1 / 1;
+export const UserAvatar = styled.img`
+  max-width: 100%;
+  max-height: 200px;
+  margin-top: 10px;
 `;
 
 export const Text = styled.p`
@@ -37,19 +38,29 @@ export const Paragraph = styled.p`
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  align-items: center;
+  border-radius: 2px;
 `;
 
 export const Input = styled.input`
-  padding: .5em 1em;
-  border-radius: .5em;
-  box-shadow: 0 .25em .25em rgba(0, 0, 0, .1);
+  width: 400px;
+  padding: 10px;
+  font-size: 14px;
+  margin-bottom: 15px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+  transition: border-color 0.3s, box-shadow 0.3s;
+
+  &:focus {
+    border-color: #4caf50;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.5);
+  }
 `;
 
 export const Button = styled.button`
-  padding: .5em 5em;
+  padding: .5em 5.3em;
   border-radius: .5em;
-  margin: 0 auto;
   color: var(--bright);
   background-color: var(--cancel);
   cursor: pointer;
@@ -58,7 +69,7 @@ export const Button = styled.button`
 export const Link = styled(RouterLink)`
   padding: .5em 5.3em;
   border-radius: .5em;
-  margin: 0 auto;
+  
   color: var(--bright);
   background-color: #000000;
   cursor: pointer;

@@ -1,58 +1,99 @@
-import { useState } from "react";
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import { useParams, useNavigate } from 'react-router-dom';
+import * as S from './style';
 
-import userPicture from "../../assets/user.png";
+interface EcoPoint {
+  _id: string;
+  name: string;
+  latitude: string;
+  longitude: string;
+  metal: boolean;
+  plastic: boolean;
+  paper: boolean;
+  glass: boolean;
+  organic: boolean;
+  electronic: boolean;
+  image: File | null;
+}
 
-import {
-  Button,
-  Container,
-  UserContainer,
-  UserPicture,
-  Text,
-  Paragraph,
-  Form,
-  Input,
-  Link,
-  Title
-} from "./style";
+export const DeletePoint: React.FC = () => {
+  const { id } = useParams();
+  const token = localStorage.getItem('auth.token');
+  const navigate = useNavigate();
 
-export function DeletePoint() {
-  const point = {
-    nome: "Teste",
-    latitude: "2332342342",
-    longitude: "-234234234",
-    picture: userPicture
+  const [ecoPoint, setEcoPoint] = useState<EcoPoint>({
+    _id: '',
+    name: '',
+    latitude: '',
+    longitude: '',
+    metal: false,
+    plastic: false,
+    paper: false,
+    glass: false,
+    organic: false,
+    electronic: false,
+    image: null,
+  });
+
+  const fetchData = async () => {
+    try {
+      const response = await axios.get<EcoPoint>(`http://localhost:3001/ecopoint/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      });
+      setEcoPoint(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar o ponto: ', error);
+    }
   };
 
-  const [password, setPassword] = useState("");
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-  const handleSubmit = () => {};
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(`http://localhost:3001/ecopoint/${id}`, {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      });
+
+      if (response.data) {
+        alert('Eco ponto deletado com sucesso!');
+        navigate(`/user`);
+      } else {
+        alert('Falha ao deletar o eco ponto. Por favor, tente novamente.');
+      }
+    } catch (error) {
+      console.error('Erro ao fazer a requisição:', error);
+      alert('Erro ao deletar o eco ponto. Por favor, tente novamente mais tarde.' + error);
+    }
+  };
 
   return (
-    <Container>
-      <Title>Deletar ponto</Title>
-      <UserContainer>
-        <UserPicture
-          src={point.picture}
-          alt="Imagem do usuário"
-          title="Imagem do usuário"
-        />
-        <Text>{point.nome}</Text>
-        <Text>{point.latitude}</Text>
-        <Text>{point.longitude}</Text>
-      </UserContainer>
-      <Paragraph>
-        Tem certeza que deseja apagar esse ponto?
-      </Paragraph>
-      <Form>
-        <Input
-          onChange={e => setPassword(e.target.value)}
-          value={password}
-          type="password"
-          placeholder="Senha"
-        />
-        <Button onClick={handleSubmit}>Deletar</Button>
-      </Form><br />
-      <Link to="/user">Voltar</Link>
-    </Container>
+    <>
+      <S.Container>
+        <S.Title>Deletar ponto</S.Title>
+        <S.Form>
+              <S.PointPicture
+                src={
+                  `http://localhost:3001/upload/${ecoPoint.image}`
+                }
+                alt="Image Preview"
+              />
+              <label>{ecoPoint.name}</label>
+          </S.Form>
+        <S.Paragraph>
+          Tem certeza que deseja apagar esse ponto?
+        </S.Paragraph>
+        <S.Form>
+          <S.Button onClick={handleDelete}>Deletar</S.Button>
+        </S.Form><br />
+        <S.Link to="/user">Voltar</S.Link>
+      </S.Container>
+    </>
   )
 }

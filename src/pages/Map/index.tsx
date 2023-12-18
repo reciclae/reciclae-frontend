@@ -46,7 +46,7 @@ export const Map = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  console.log(ecoPoints);
+  
   const handleMapClick = (event: google.maps.MapMouseEvent | null) => {
     if (!event || !event.latLng) {
       return;

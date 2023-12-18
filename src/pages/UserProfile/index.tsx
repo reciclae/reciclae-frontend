@@ -24,18 +24,45 @@ import {
     BoxPoints
 } from "./style";
 
-const userData = {
-    name: "João da Silva",
-    email: "joao@silva.com",
-    image: null,
-};
-
+interface EcoPoint {
+    id: string;
+    name: string;
+    latitude: string;
+    longitude: string;
+    metal: boolean;
+    plastic: boolean;
+    paper: boolean;
+    glass: boolean;
+    organic: boolean;
+    electronic: boolean;
+    image: File | null;
+}
 
 export function UserProfile() {
     const token = localStorage.getItem("auth.token");
-    const user = localStorage.getItem("auth.user");
+    const user = JSON.parse(localStorage.getItem("auth.user") || "");
     const params = useParams(); // Obtém o ID do usuário da URL
+    const [ecoPoints, setEcoPoints] = useState<EcoPoint[]>([]);
     const [maxHeight, setMaxHeight] = useState(300);
+
+    console.log(user);
+
+    const fetchData = async () => {
+        try {
+          const response = await axios.get<EcoPoint[]>('http://localhost:3001/userecopoint/' + user.id, {
+            headers: {
+              'Authorization': 'Bearer ' + token
+            },
+          });
+          setEcoPoints(Object.values(response.data));
+        } catch (error) {
+          console.error('Erro ao buscar os pontos: ', error);
+        }
+    }
+    
+      useEffect(() => {
+        fetchData();
+    }, []);
 
 
     // const [userData, setUserData] = useState<any>({});
@@ -92,6 +119,13 @@ export function UserProfile() {
             tipo: "Este é o item 2.",
         },
     ]);
+
+
+    /**
+     * Rota delete user /user/delete/${user.id}
+     * Rota delete point /point/delete/:id
+     */
+
     return (
         <Container>
             <Header />
@@ -99,18 +133,18 @@ export function UserProfile() {
                 <UserContainer>
 
                     <UserPicture
-                        src={userData.image || imgUser}
+                        src={`http://localhost:3001/upload/${user.avatar}` || imgUser}
                         alt="Foto do usuário"
                         title="Foto do usuário"
                     />
                     <TextName>
-                        {userData.name}
+                        {user.username}
 
                     </TextName>
                     <TextEmail>
-                        {userData.email}
+                        {user.email}
                     </TextEmail>
-                    <BtnEdit to="/user/edit">
+                    <BtnEdit to="/user/edit"> 
                         Editar Perfil
                     </BtnEdit>
                     <BtnDelete to="/user/delete">
@@ -129,12 +163,13 @@ export function UserProfile() {
 
                     <BoxPoints>
                         <ul>
-                            {items.map((item) => (
+                            {ecoPoints.map((ecoPoint, index) => (
                                 <CardPoint
-                                    key={item.id}
-                                    image={item.image}
-                                    name={item.name}
-                                    tipo={item.tipo}
+                                    key={index}
+                                    image={`http://localhost:3001/upload/${ecoPoint.image}`}
+                                    name={ecoPoint.name}
+                                    tipo={"teste"}
+                                    // tipo={item.tipo} listar todos os tipos.
 
                                 />
                             ))}

@@ -14,29 +14,69 @@ import {
     ImgButon
 } from "./style";
 
-console.log("chegou no ponto");
+interface EcoPoint {
+    _id: string;
+    name: string;
+    latitude: string;
+    longitude: string;
+    metal: boolean;
+    plastic: boolean;
+    paper: boolean;
+    glass: boolean;
+    organic: boolean;
+    electronic: boolean;
+    image: File | null;
+}
 
-const imgWeb = "https://www.posgraduacaounincor.com.br/assets/Unincor/images/sem-imagem.jpg"
-// variavel teste
-const dataPoint = {
-    name: "ReciclaAe",
-    Tipo: "Metal, Plastico, Papel",
-    image: null,
-};
-//função de conexão com axios
+export function SelectPoint() {    
+    const [ecoPoint, setEcoPoint] = useState<EcoPoint>({
+        _id: '',
+        name: '',
+        latitude: '',
+        longitude: '',
+        metal: false,
+        plastic: false,
+        paper: false,
+        glass: false,
+        organic: false,
+        electronic: false,
+        image: null,
+    });
+    const token = localStorage.getItem("auth.token");
+    const { id } = useParams();
+    
+    const imgWeb = "https://www.posgraduacaounincor.com.br/assets/Unincor/images/sem-imagem.jpg"
+    
+    const fetchData = async () => {
+        try {
+          const response = await axios.get<EcoPoint>('http://localhost:3001/ecopoint/' + id, {
+            headers: {
+              'Authorization': 'Bearer ' + token
+            },
+          });
+          setEcoPoint(response.data);
+        } catch (error) {
+          console.error('Erro ao buscar o ponto: ', error);
+        }
+      }
+    
+      useEffect(() => {
+        fetchData();
+    }, []);
 
-export function SelectPoint() {
+    console.log(ecoPoint);
+
     return (
         <Container>
             <Header />
             <Box>
                 <BoxInfo>
 
-                    <ImgPoint src={dataPoint.image || imgWeb}
+                    <ImgPoint src={`http://localhost:3001/upload/${ecoPoint.image}` ?? imgWeb}
                         alt="Foto do usuário"
                         title="Foto do usuário" />
-                    <Title>{dataPoint.name}</Title>
-                    <Text>{dataPoint.Tipo}</Text>
+                    <Title>{ecoPoint.name}</Title>
+                    {/* <Text>{ecoPoint.Tipo}</Text> */}
                     <Button>
                         <ImgButon src={ImgRoute} />
                         Rota</Button>

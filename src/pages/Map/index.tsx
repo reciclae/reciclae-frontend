@@ -5,7 +5,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 interface EcoPoint {
-  _id: string;
+  id: string;
   name: string;
   latitude: string;
   longitude: string;
@@ -46,14 +46,14 @@ export const Map = () => {
   useEffect(() => {
     fetchData();
   }, []);
-
+  console.log(ecoPoints);
   const handleMapClick = (event: google.maps.MapMouseEvent | null) => {
     if (!event || !event.latLng) {
       return;
     }
 
     setSelectedPoint({
-      _id: "-1",
+      id: "-1",
       name: "Ponto selecionado",
       latitude: event.latLng.lat().toString(),
       longitude: event.latLng.lng().toString(),
@@ -78,7 +78,7 @@ export const Map = () => {
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyB-GKZUSQhzaWFa7HhCP76UqGfduzVeJB0"
-  })
+  });
 
   return isLoaded ? (
     <>
@@ -93,7 +93,10 @@ export const Map = () => {
           <Marker
             key={index}
             position={{ lat: parseFloat(ecoPoint.latitude), lng: parseFloat(ecoPoint.longitude) }}
-            onClick={() => setSelectedPoint(ecoPoint)}
+            onClick={() => {
+              setSelectedPoint(ecoPoint); 
+              navigate(`/point/select/${ecoPoint.id}`);               
+            }}
           />
         ))}
 

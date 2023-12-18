@@ -1,5 +1,4 @@
 import { Header, Footer } from "../../components";
-
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -14,6 +13,8 @@ import {
     Button,
     ImgButon
 } from "./style";
+
+console.log("chegou no ponto");
 
 const imgWeb = "https://www.posgraduacaounincor.com.br/assets/Unincor/images/sem-imagem.jpg"
 // variavel teste

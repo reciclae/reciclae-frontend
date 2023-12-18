@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {Header} from '../../components/Header/index';
 import {Footer} from '../../components/Footer/index';
 
 export const CreatePoint = () => {
+  const navigate = useNavigate();
   const { latitude, longitude } = useParams();
   const user = JSON.parse(localStorage.getItem("auth.user") || "");
   const token = localStorage.getItem("auth.token");
@@ -92,6 +93,7 @@ export const CreatePoint = () => {
       
       if (response.data) {
         alert('Eco ponto criado com sucesso!');
+        navigate(`/map`);
       } else {
         alert('Falha ao criar o eco ponto. Por favor, tente novamente.');
       }

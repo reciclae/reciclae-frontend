@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
-import { Navigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import {Header} from '../../components/Header/index';
 import {Footer} from '../../components/Footer/index';
 
 export const EditUser = () => {
+  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("auth.user") || "");
   const token = localStorage.getItem("auth.token");
   const [formData, setFormData] = useState<{
@@ -74,6 +75,7 @@ export const EditUser = () => {
       
       if (response.data) {
         alert('Usuário atualizado com sucesso!');
+        navigate(`/user`);
       } else {
         alert('Falha ao atualizar o usuário. Por favor, tente novamente.');
       }

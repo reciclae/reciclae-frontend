@@ -26,7 +26,7 @@ export function Router() {
         <Route path="/map" element={<Map/>} />
         <Route path="/point/create/:latitude/:longitude" element={<CreatePoint/>} />
         <Route path="/point/edit/:id" element={<EditPoint />} />
-        <Route path="/point/delete" element={<DeletePoint />} />
+        <Route path="/point/delete/:id" element={<DeletePoint />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </BrowserRouter>

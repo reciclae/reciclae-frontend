@@ -8,6 +8,7 @@ import {Footer} from '../../components/Footer/index';
 export const CreatePoint = () => {
   const { latitude, longitude } = useParams();
   const user = JSON.parse(localStorage.getItem("auth.user") || "");
+  const token = localStorage.getItem("auth.token");
   const [formData, setFormData] = useState<{
     name: string;
     latitude: string;
@@ -85,6 +86,7 @@ export const CreatePoint = () => {
       const response = await axios.post('http://localhost:3001/ecopoint', formDataWithImage, {
         headers: {
           'Content-Type': 'multipart/form-data',
+          'Authorization': 'Bearer ' + token,
         },
       });
       

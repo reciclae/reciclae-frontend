@@ -5,16 +5,61 @@ import { useParams, useNavigate } from 'react-router-dom';
 import * as S from './style';
 import { Header } from '../../components/Header/index';
 import { Footer } from '../../components/Footer/index';
+import { stringify } from 'querystring';
 
 // Defina a interface para os parâmetros da URL
+
+interface EcoPoint {
+  _id: string;
+  name: string;
+  latitude: string;
+  longitude: string;
+  metal: boolean;
+  plastic: boolean;
+  paper: boolean;
+  glass: boolean;
+  organic: boolean;
+  electronic: boolean;
+  image: File | null;
+}
 
 export const EditPoint: React.FC = () => {
   // Obtenha os parâmetros da URL usando useParams
   const { id } = useParams();
-  const token = localStorage.getItem('auth.token');
-  const user = localStorage.getItem('auth.user');
+  const user = JSON.parse(localStorage.getItem("auth.user") || "");
+  const [ecoPoint, setEcoPoint] = useState<EcoPoint>({
+    _id: '',
+    name: '',
+    latitude: '',
+    longitude: '',
+    metal: false,
+    plastic: false,
+    paper: false,
+    glass: false,
+    organic: false,
+    electronic: false,
+    image: null,
+  });
+  const token = localStorage.getItem("auth.token");
   const navigation = useNavigate();
 
+  const fetchData = async () => {
+    try {
+      const response = await axios.get<EcoPoint>('http://localhost:3001/ecopoint/' + id, {
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+      });
+      setEcoPoint(response.data);
+    } catch (error) {
+      console.error('Erro ao buscar o ponto: ', error);
+    }
+  }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  
   // Defina o estado inicial com os dados do ponto
   const [formData, setFormData] = useState<{
     name: string;
@@ -36,42 +81,21 @@ export const EditPoint: React.FC = () => {
     image: null,
   });
 
+  useEffect(() => {
+    setFormData({
+      name: ecoPoint.name,
+      metal: ecoPoint.metal,
+      plastic: ecoPoint.plastic,
+      paper: ecoPoint.paper,
+      glass: ecoPoint.glass,
+      organic: ecoPoint.organic,
+      electronic: ecoPoint.electronic,
+      image: ecoPoint.image,
+    });
+  }, [ecoPoint]);
+
   // Estado para visualização prévia da imagem
   const [imagePreview, setImagePreview] = useState<string | null>(null);
-
-  // UseEffect para buscar os dados do ponto ao carregar a página
-  useEffect(() => {
-    const fetchPointData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:3001/ecopoint/${id}`, {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Authorization': 'Bearer '+ token
-          },
-        });
-
-        const pointData = response.data;
-
-        setFormData({
-          name: pointData.name,
-          metal: pointData.metal,
-          plastic: pointData.plastic,
-          paper: pointData.paper,
-          glass: pointData.glass,
-          organic: pointData.organic,
-          electronic: pointData.electronic,
-          image: null, // Se quiser exibir a imagem atual, pode preencher aqui
-        });
-
-        // Se quiser exibir a imagem atual, configure o imagePreview aqui
-      } catch (error) {
-        console.error('Erro ao buscar os dados do ponto:', error);
-        // Tratar o erro, talvez redirecionar para uma página de erro
-      }
-    };
-
-    fetchPointData();
-  }, [id, token]);
 
   // Handlers para mudanças nos campos do formulário
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,12 +140,12 @@ export const EditPoint: React.FC = () => {
     if (formData.image !== null) {
       formDataWithImage.append('image', formData.image);
     }
-
+    console.log(formData.image);
     try {
-      const response = await axios.put(`http://localhost:3001/ecopoint/${id}`, formDataWithImage, {
+      const response = await axios.put('http://localhost:3001/ecopoint/' + id, formDataWithImage, {
         headers: {
           'Content-Type': 'multipart/form-data',
-          'Authorization': 'Bearer '+ token
+          'Authorization': 'Bearer ' + token,
         },
       });
 
@@ -149,7 +173,7 @@ export const EditPoint: React.FC = () => {
             <S.ImagePreview
               src={
                 imagePreview ??
-                'https://st3.depositphotos.com/17828278/33150/v/450/depositphotos_331503262-stock-illustration-no-image-vector-symbol-missing.jpg'
+                `http://localhost:3001/upload/${ecoPoint.image}`
               }
               alt="Image Preview"
             />

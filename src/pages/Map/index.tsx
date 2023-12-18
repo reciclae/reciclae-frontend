@@ -9,6 +9,12 @@ interface EcoPoint {
   name: string;
   latitude: string;
   longitude: string;
+  metal: boolean;
+  plastic: boolean;
+  paper: boolean;
+  glass: boolean;
+  organic: boolean;
+  electronic: boolean;
 }
 
 export const Map = () => {
@@ -51,6 +57,12 @@ export const Map = () => {
       name: "Ponto selecionado",
       latitude: event.latLng.lat().toString(),
       longitude: event.latLng.lng().toString(),
+      metal: false,
+      plastic: false,
+      paper: false,
+      glass: false,
+      organic: false,
+      electronic: false,
     });
 
     // Mostra o modal ao clicar no mapa em um local sem ponto

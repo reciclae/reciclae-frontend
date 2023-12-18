@@ -30,23 +30,19 @@ export function AuthProvider({children}: Props) {
   const [user, setUser] = useState<IUser>();
 
   const login = async (email: string, password: string) => {
-    try {
-      const response = await api.post("login", {
-        email, password
-      });
-      const data = response.data as IResponseData;
+    const response = await api.post("login", {
+      email, password
+    });
+    const data = response.data as IResponseData;
 
-      const token = data.token;
-      const user = data.userData;
+    const token = data.token;
+    const user = data.userData;
 
-      api.defaults.headers.common.Authorization = `Bearer ${token}`;
-      localStorage.setItem("auth.token", token);
-      
-      setUser(user);
-      localStorage.setItem("auth.user", JSON.stringify(user));
-    } catch(err) {
-      console.log(err);
-    }
+    api.defaults.headers.common.Authorization = `Bearer ${token}`;
+    localStorage.setItem("auth.token", token);
+    
+    setUser(user);
+    localStorage.setItem("auth.user", JSON.stringify(user));
   }
 
   const logout = () => {

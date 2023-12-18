@@ -12,6 +12,11 @@ export const Form = styled.form`
   margin: 8rem auto;
 `;
 
+export const Warning = styled.span`
+  text-align: center;
+  color: var(--cancel);
+`;
+
 export const FormFooter = styled.div`
   text-align: center;
 `;

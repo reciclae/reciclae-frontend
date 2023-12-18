@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosError } from "axios";
 
 import { AuthContext } from "../../context/AuthContext";
 import { api } from "../../api";
@@ -16,7 +17,6 @@ import {
   FormFooter,
   Text
 } from "./style";
-import { AxiosError } from "axios";
 
 export function Signup() {
   const { user, login } = useContext(AuthContext);

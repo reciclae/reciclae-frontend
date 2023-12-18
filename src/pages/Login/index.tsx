@@ -1,7 +1,8 @@
-import { useContext, useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { AxiosError } from "axios";
 
 import { AuthContext } from "../../context/AuthContext";
 import { schema, FormData } from "./form";
@@ -11,6 +12,7 @@ import { Header, Title, Input, Button, Link, Footer } from "../../components";
 import {
   Container,
   Form,
+  Warning,
   FormFooter,
   Text
 } from "./style";
@@ -22,6 +24,8 @@ export function Login() {
   const {register, handleSubmit, formState: {errors}} = useForm<FormData>({
     resolver: zodResolver(schema)
   });
+
+  const [warning, setWarning] = useState("");
 
   useEffect(() => {
     if(user) navigate("/");
@@ -35,6 +39,9 @@ export function Login() {
       await login(email, password);
     } catch(err) {
       console.log(err)
+      if(!(err instanceof AxiosError)) return;
+
+      setWarning(err.response?.data.message);
     }
   }
 
@@ -60,6 +67,8 @@ export function Login() {
           register={register}
           error={errors.password}
         />
+
+        <Warning>{warning}</Warning>
 
         <Button>Entrar</Button>
 

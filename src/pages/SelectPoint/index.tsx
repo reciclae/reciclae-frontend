@@ -73,7 +73,7 @@ export function SelectPoint() {
                 <BoxInfo>
 
                     <ImgPoint src={`http://localhost:3001/upload/${ecoPoint.image}` ?? imgWeb}
-                        alt="Foto do usuário"
+                        alt="Foto do Ponto"
                         title="Foto do usuário" />
                     <Title>{ecoPoint.name}</Title>
                     {/* <Text>{ecoPoint.Tipo}</Text> */}

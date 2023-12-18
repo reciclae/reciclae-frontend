@@ -90,7 +90,8 @@ export const Button = styled(RouterLink)`
     font-weight: 600;
     border-radius: 10px;
     cursor: pointer;
-    margin-top: 2rem;
+    margin-top:0.5rem;
+    margin-bottom: 0.75rem;
     font-size: 0.85rem; 
     justify-content: center;
     align-items: center;
@@ -135,4 +136,9 @@ export const BtnDelete = styled(RouterLink)`
     justify-content: center;
     align-items: center;
     margin-bottom: 3rem;
+`;
+
+export const BoxPoints = styled.div`
+   height: 500px;
+   overflow-y: auto;
 `;

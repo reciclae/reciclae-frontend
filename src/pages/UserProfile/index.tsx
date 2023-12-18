@@ -2,6 +2,7 @@ import { Header } from "../../components";
 import Add from "../../assets/add-point.svg";
 import imgUser from "../../assets/imgUser.png";
 
+import { CardPoint } from "../../components/CardPoint";
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -19,7 +20,8 @@ import {
     Img,
     UserPicture,
     BtnEdit,
-    BtnDelete
+    BtnDelete,
+    BoxPoints
 } from "./style";
 
 const userData = {
@@ -33,6 +35,8 @@ export function UserProfile() {
     const token = localStorage.getItem("auth.token");
     const user = localStorage.getItem("auth.user");
     const params = useParams(); // Obtém o ID do usuário da URL
+    const [maxHeight, setMaxHeight] = useState(300);
+
 
     // const [userData, setUserData] = useState<any>({});
 
@@ -58,6 +62,36 @@ export function UserProfile() {
     // }, []);
 
 
+    // variavel teste
+    const imgWeb = "https://www.posgraduacaounincor.com.br/assets/Unincor/images/sem-imagem.jpg"
+
+
+    const [items, setItems] = useState([
+        {
+            id: 1,
+            image: imgWeb,
+            name: "Item 1",
+            tipo: "Este é o item 1.",
+        },
+        {
+            id: 2,
+            image: imgWeb,
+            name: "Item 2",
+            tipo: "Este é o item 2.",
+        },
+        {
+            id: 3,
+            image: imgWeb,
+            name: "Item 2",
+            tipo: "Este é o item 2.",
+        },
+        {
+            id: 4,
+            image: imgWeb,
+            name: "Item 2",
+            tipo: "Este é o item 2.",
+        },
+    ]);
     return (
         <Container>
             <Header />
@@ -93,7 +127,19 @@ export function UserProfile() {
                 <TextContainer>
                     <Title>Locais de Coleta</Title>
 
+                    <BoxPoints>
+                        <ul>
+                            {items.map((item) => (
+                                <CardPoint
+                                    key={item.id}
+                                    image={item.image}
+                                    name={item.name}
+                                    tipo={item.tipo}
 
+                                />
+                            ))}
+                        </ul>
+                    </BoxPoints>
                     <Button to="/map">
                         <Img src={Add} alt="Logotipo do ReciclaAE" title="Logotipo do ReciclaAE" />
                         Adicionar Ponto De Coleta

@@ -15,7 +15,6 @@ export const Box = styled.div`
 
 export const BoxInfo = styled.div`
     display: flex;
-    /* justify-content:center; */
     flex-direction:column;
     width: 50rem;
     height: 30rem;

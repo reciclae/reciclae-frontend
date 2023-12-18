@@ -86,32 +86,29 @@ export const DeleteUser = () => {
 
   return (
     <>
-    <Header/>
-    <S.DeleteUserWrapper>
+    <S.Container>
+      <S.Title>Deletar Usuário</S.Title>
       <S.Form onSubmit={handleSubmit}>
-        <S.Title>Deletar usuário</S.Title>
+            <S.UserAvatar
+              src={
+                `http://localhost:3001/upload/${user.avatar}`
+              }
+              alt="Image Preview"
+            />
+            <S.Paragraph>{formData.userName}</S.Paragraph>
+      <S.Paragraph>
+      Tem certeza que deseja <span style={{color: "var(--cancel)"}}>deletar</span> sua conta?
+      </S.Paragraph>
+      <S.Text>Senha:</S.Text>
+      <S.Input type="password" name="password" value={formData.password} onChange={handleChange} />
 
-        <S.FileInputWrapper>
-          <S.ImagePreview src={imagePreview ?? `http://localhost:3001/upload/${user.avatar}`} alt="Image Preview" />
-        </S.FileInputWrapper>
-
-        <S.Label>{formData.userName}</S.Label>
-
-        <S.Label>Senha:</S.Label>
-        <S.Input type="password" name="password" value={formData.password} onChange={handleChange} />
-
-        <S.Label>Confirme a senha:</S.Label>
-        <S.Input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
-
-        <S.ButtonWrapper>
-          <>
-          <S.Back to="/user">Voltar</S.Back>
-          </>
-          <S.DeleteButton type="submit">Deletar</S.DeleteButton>
-        </S.ButtonWrapper>
-      </S.Form>
-    </S.DeleteUserWrapper>
-    <Footer/>
+      <S.Text>Confirme a senha:</S.Text>
+      <S.Input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
+      <br/>
+      <S.Button type="submit">Deletar</S.Button><br/>
+      <S.Link to="/user">Voltar</S.Link>
+    </S.Form>
+    </S.Container>
     </>
   );
 };

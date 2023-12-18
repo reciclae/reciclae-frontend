@@ -1,18 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-
-import userPicture from "../../assets/user.png";
-
-import {
-  Button,
-  Container,
-  PointPicture,
-  Paragraph,
-  Form,
-  Link,
-  Title,
-} from "./style";
+import * as S from './style';
 
 interface EcoPoint {
   _id: string;
@@ -31,7 +20,7 @@ interface EcoPoint {
 export const DeletePoint: React.FC = () => {
   const { id } = useParams();
   const token = localStorage.getItem('auth.token');
-  const navigation = useNavigate();
+  const navigate = useNavigate();
 
   const [ecoPoint, setEcoPoint] = useState<EcoPoint>({
     _id: '',
@@ -74,8 +63,7 @@ export const DeletePoint: React.FC = () => {
 
       if (response.data) {
         alert('Eco ponto deletado com sucesso!');
-        // Redirecionar para a página inicial ou outra página após a exclusão
-        navigation('http://localhost:3000/user');
+        navigate(`/user`);
       } else {
         alert('Falha ao deletar o eco ponto. Por favor, tente novamente.');
       }
@@ -86,24 +74,26 @@ export const DeletePoint: React.FC = () => {
   };
 
   return (
-    <Container>
-      <Title>Deletar ponto</Title>
-      <Form>
-            <PointPicture
-              src={
-                `http://localhost:3001/upload/${ecoPoint.image}`
-              }
-              alt="Image Preview"
-            />
-            <label>{ecoPoint.name}</label>
-        </Form>
-      <Paragraph>
-        Tem certeza que deseja apagar esse ponto?
-      </Paragraph>
-      <Form>
-        <Button onClick={handleDelete}>Deletar</Button>
-      </Form><br />
-      <Link to="/user">Voltar</Link>
-    </Container>
+    <>
+      <S.Container>
+        <S.Title>Deletar ponto</S.Title>
+        <S.Form>
+              <S.PointPicture
+                src={
+                  `http://localhost:3001/upload/${ecoPoint.image}`
+                }
+                alt="Image Preview"
+              />
+              <label>{ecoPoint.name}</label>
+          </S.Form>
+        <S.Paragraph>
+          Tem certeza que deseja apagar esse ponto?
+        </S.Paragraph>
+        <S.Form>
+          <S.Button onClick={handleDelete}>Deletar</S.Button>
+        </S.Form><br />
+        <S.Link to="/user">Voltar</S.Link>
+      </S.Container>
+    </>
   )
 }

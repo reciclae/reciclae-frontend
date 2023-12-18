@@ -1,31 +1,10 @@
 import styled from "styled-components";
 import { Link as RouterLink } from "react-router-dom";
 
-export const Back = styled(RouterLink)`
-  background-color: #333;
-  color: #fff;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #555;
-  }
-`;
-
-export const DeleteUserWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-top: 30px;
-`;
-
-export const Form = styled.form`
-  max-width: 500px;
-  width: 100%;
+export const Container = styled.div`
+  max-width: 600px;
+  margin: 2rem auto;
+  text-align: center;
   padding: 20px;
   background-color: #fff;
   border-radius: 8px;
@@ -33,22 +12,38 @@ export const Form = styled.form`
 `;
 
 export const Title = styled.h1`
-  font-size: 24px;
-  margin-bottom: 20px;
-  color: #333;
-  text-align: center;
+  font-family: 'Kalam', cursive;
+  font-size: 3em;
 `;
 
-export const Label = styled.label`
-  display: block;
-  font-size: 16px;
-  color: #555;
-  margin-bottom: 8px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+export const UserContainer = styled.div`
+  margin: 1rem;
+`;
+
+export const UserAvatar = styled.img`
+  max-width: 100%;
+  max-height: 200px;
+  margin-top: 10px;
+`;
+
+export const Text = styled.p`
+  margin: .25rem;
+`;
+
+export const Paragraph = styled.p`
+  margin: 1rem;
+  font-size: 1.25rem;
+`;
+
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 2px;
 `;
 
 export const Input = styled.input`
-  width: 100%;
+  width: 400px;
   padding: 10px;
   font-size: 14px;
   margin-bottom: 15px;
@@ -63,43 +58,19 @@ export const Input = styled.input`
   }
 `;
 
-export const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-`;
-
-
-export const DeleteButton = styled.button`
-  background-color: #4caf50;
-  color: #fff;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  border-radius: 4px;
+export const Button = styled.button`
+  padding: .5em 5.3em;
+  border-radius: .5em;
+  color: var(--bright);
+  background-color: var(--cancel);
   cursor: pointer;
-  transition: background-color 0.3s;
-
-  &:hover {
-    background-color: #45a049;
-  }
 `;
 
-export const FileInputWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 2px;
+export const Link = styled(RouterLink)`
+  padding: .5em 5.3em;
+  border-radius: .5em;
+  
+  color: var(--bright);
+  background-color: #000000;
+  cursor: pointer;
 `;
-
-export const FileInput = styled.input`
-  margin-top: 5px;
-  margin-bottom: 20px;
-`;
-
-export const ImagePreview = styled.img`
-  max-width: 100%;
-  max-height: 200px;
-  margin-top: 10px;
-`;
-

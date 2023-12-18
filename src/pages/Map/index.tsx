@@ -28,7 +28,7 @@ export const Map = () => {
     try {
       const response = await axios.get<EcoPoint[]>('http://localhost:3001/ecopoints', {
         headers: {
-          'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY1NzRjN2IzOTY2MzFjNmI3MjBkNzkxNCIsImlhdCI6MTcwMjY0NzQ2MSwiZXhwIjoxNzAyNzMzODYxfQ.65t1GnXcb-8YuvnlOEHD6BagXBynpbRvWph00XldnVM'
+          'Authorization': 'Bearer ' + token
         },
       });
       setEcoPoints(response.data);

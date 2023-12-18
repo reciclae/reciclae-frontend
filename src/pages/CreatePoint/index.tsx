@@ -145,7 +145,9 @@ export const CreatePoint = () => {
         </S.CheckboxLabel>        
 
         <S.ButtonWrapper>
+          <>
           <S.Link to='/map'>Voltar</S.Link>
+          </>
           <S.CreateButton type="submit">Criar Eco Ponto</S.CreateButton>
         </S.ButtonWrapper>
       </S.Form>

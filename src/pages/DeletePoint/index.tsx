@@ -53,7 +53,9 @@ export const DeletePoint: React.FC = () => {
     fetchData();
   }, []);
 
-  const handleDelete = async () => {
+  const handleDelete = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
     try {
       const response = await axios.delete(`http://localhost:3001/ecopoint/${id}`, {
         headers: {

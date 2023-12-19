@@ -21,17 +21,12 @@ export const BoxInfo = styled.div`
     align-items: center;
     margin-top: 3rem;
     padding: 1rem;
-    //border
-    border-color: var(--greenDark);
-    border-radius: 10px;
-    border-style: solid;
-    border: 10px;
     background-color: var(--greenBg);
 
     `;
 export const ImgPoint = styled.img`
-    max-width: 20rem;
-    max-height: 12rem;
+    width: 20rem;
+    height: 12rem;
     border-radius: 10px;
     margin-top: 2rem;
 `;
@@ -50,7 +45,7 @@ export const Text = styled.p`
     text-align: center;
     `;
 
-export const Button = styled.button`
+export const Button = styled(RouterLink)`
     display: flex;
     background-color:var(--primary);
     color:var(--bright);

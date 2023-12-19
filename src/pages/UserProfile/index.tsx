@@ -45,8 +45,6 @@ export function UserProfile() {
     const [ecoPoints, setEcoPoints] = useState<EcoPoint[]>([]);
     const [maxHeight, setMaxHeight] = useState(300);
 
-    console.log(user);
-
     const fetchData = async () => {
         try {
           const response = await axios.get<EcoPoint[]>('http://localhost:3001/userecopoint/' + user.id, {

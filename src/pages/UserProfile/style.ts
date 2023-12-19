@@ -34,8 +34,10 @@ export const UserContainer = styled.div`
 `;
 
 export const UserPicture = styled.img`
-  width: 5.5rem;
+  width: 7.5rem;
+  height: 7.5rem;
   margin-top: 3rem;
+  border-radius: 3.5rem;
 `;
 
 

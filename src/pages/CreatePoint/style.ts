@@ -6,7 +6,7 @@ export const CreateEcoPointWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
-  padding-bottom: 80px;
+  padding-bottom: 30px;
 `;
 
 export const Form = styled.form`

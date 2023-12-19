@@ -3,7 +3,6 @@ import axios from 'axios';
 import * as S from './style';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../../components/Header/index';
-import { Footer } from '../../components/Footer/index';
 
 export const CreatePoint = () => {
   const navigate = useNavigate();
@@ -156,7 +155,6 @@ export const CreatePoint = () => {
           </S.ButtonWrapper>
         </S.Form>
       </S.CreateEcoPointWrapper>
-      <Footer />
     </>
   );
 };

@@ -26,6 +26,7 @@ import {
     BtnDelete,
     BoxPoints
 } from "./style";
+import { array } from "zod";
 
 interface EcoPoint {
     _id: string;
@@ -39,6 +40,7 @@ interface EcoPoint {
     organic: boolean;
     electronic: boolean;
     image: File | null;
+
 }
 
 export function UserProfile() {
@@ -65,7 +67,16 @@ export function UserProfile() {
         fetchData();
     }, []);
 
-
+    function getTiposString(ecoPoint: EcoPoint) {
+        const tipos = [];
+        if (ecoPoint.metal) tipos.push("metal");
+        if (ecoPoint.plastic) tipos.push("plástico");
+        if (ecoPoint.paper) tipos.push("papel");
+        if (ecoPoint.glass) tipos.push("vidro");
+        if (ecoPoint.organic) tipos.push("orgânico");
+        if (ecoPoint.electronic) tipos.push("eletrônico");
+        return tipos.join(", ");
+    }
 
 
     // variavel teste
@@ -121,7 +132,7 @@ export function UserProfile() {
                                     id={ecoPoint._id}
                                     image={`http://localhost:3001/upload/${ecoPoint.image}`}
                                     name={ecoPoint.name}
-                                    tipo={"teste"}
+                                    tipo={getTiposString(ecoPoint)}
 
                                 // tipo={item.tipo} listar todos os tipos.
 

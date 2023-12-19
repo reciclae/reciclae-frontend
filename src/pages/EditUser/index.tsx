@@ -3,7 +3,6 @@ import axios from 'axios';
 import * as S from './style';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../../components/Header/index';
-import { Footer } from '../../components/Footer/index';
 
 export const EditUser = () => {
   const navigate = useNavigate();
@@ -114,7 +113,7 @@ export const EditUser = () => {
           </S.ButtonWrapper>
         </S.Form>
       </S.UpdateUserWrapper>
-      <Footer />
+
     </>
   );
 };

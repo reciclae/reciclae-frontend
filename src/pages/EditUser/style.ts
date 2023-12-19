@@ -21,6 +21,7 @@ export const UpdateUserWrapper = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 30px;
+  margin-bottom: 30px;
 `;
 
 export const Form = styled.form`

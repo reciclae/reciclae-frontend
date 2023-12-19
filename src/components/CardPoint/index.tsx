@@ -42,7 +42,7 @@ export function CardPoint({ image, name, tipo, id }: CardPointProps) {
             <Box>
                 <BoxImg>
                     <ImgPoint src={image || imgWeb}
-                        alt="Foto do usuário" />
+                        alt="Foto do ponto" />
                 </BoxImg>
 
 

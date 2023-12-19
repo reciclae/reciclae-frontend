@@ -40,10 +40,10 @@ const Graphic: React.FC<GraphicProps> = () => {
     }, []);
 
     useEffect(() => {
-        setState({
-            ...state,
+        setState(prevState => ({
+            ...prevState,
             series: [ecoPoints.paper, ecoPoints.glass, ecoPoints.metal, ecoPoints.plastic, ecoPoints.electronic, ecoPoints.organic],
-        });
+        }));
     }, [ecoPoints]);
 
     const [state, setState] = useState<GraphicState>({

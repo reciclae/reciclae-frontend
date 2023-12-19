@@ -32,11 +32,7 @@ export const Map = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<EcoPoint[]>('http://localhost:3001/ecopoints', {
-        headers: {
-          'Authorization': 'Bearer ' + token
-        },
-      });
+      const response = await axios.get<EcoPoint[]>('http://localhost:3001/ecopoints/public');
       setEcoPoints(response.data);
     } catch (error) {
       console.error('Erro ao buscar os pontos: ', error);

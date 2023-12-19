@@ -18,7 +18,7 @@ export function About() {
         <TextContainer>
           <Title>Sobre nós</Title>
           <Paragraph>Esta é uma aplicação Web desenvolvida com Typescript e React feita para a disciplina de Programação para Web 2 do curso de Análise e Desenvolvimento de Sistemas do Instituto Federal da Paraíba campus Cajazeiras.</Paragraph>
-          <Paragraph>Integrantes da equipe: Hélio José, Rebehk Jordão, Daniel de Oliveira e João Victor Pinheiro.</Paragraph>
+          <Paragraph>Integrantes da equipe: Júnior Silva, Rebehk Jordão, Daniel de Oliveira e João Victor Pinheiro.</Paragraph>
         </TextContainer>
       </Main>
       <Footer />

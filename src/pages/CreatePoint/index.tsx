@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
 import { useNavigate, useParams } from 'react-router-dom';
-import {Header} from '../../components/Header/index';
-import {Footer} from '../../components/Footer/index';
+import { Header } from '../../components/Header/index';
+import { Footer } from '../../components/Footer/index';
 
 export const CreatePoint = () => {
   const navigate = useNavigate();
   const { latitude, longitude } = useParams();
-  const user = JSON.parse(localStorage.getItem("auth.user") || "");
+  const user = JSON.parse(localStorage.getItem("auth.user") || "{}");
   const token = localStorage.getItem("auth.token");
   const [formData, setFormData] = useState<{
     name: string;
@@ -47,12 +47,12 @@ export const CreatePoint = () => {
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files && e.target.files[0];
-  
+
     setFormData((prevData) => ({
       ...prevData,
       image: selectedFile !== undefined ? selectedFile : null,
     }));
-  
+
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -62,7 +62,7 @@ export const CreatePoint = () => {
     } else {
       setImagePreview(null);
     }
-  }; 
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -90,7 +90,7 @@ export const CreatePoint = () => {
           'Authorization': 'Bearer ' + token,
         },
       });
-      
+
       if (response.data) {
         alert('Eco ponto criado com sucesso!');
         navigate(`/map`);
@@ -105,58 +105,58 @@ export const CreatePoint = () => {
 
   return (
     <>
-    <Header/>
-    <S.CreateEcoPointWrapper>
-      <S.Form onSubmit={handleSubmit}>
-        <S.Title>Criar Eco Ponto</S.Title>
+      <Header />
+      <S.CreateEcoPointWrapper>
+        <S.Form onSubmit={handleSubmit}>
+          <S.Title>Criar Eco Ponto</S.Title>
 
-        <S.FileInputWrapper>
-          <S.ImagePreview src={imagePreview ?? "https://st3.depositphotos.com/17828278/33150/v/450/depositphotos_331503262-stock-illustration-no-image-vector-symbol-missing.jpg"} alt="Image Preview" />
-          <S.FileInput type="file" name="image" accept="image/*" onChange={handleFileChange} />
-        </S.FileInputWrapper>
+          <S.FileInputWrapper>
+            <S.ImagePreview src={imagePreview ?? "https://st3.depositphotos.com/17828278/33150/v/450/depositphotos_331503262-stock-illustration-no-image-vector-symbol-missing.jpg"} alt="Image Preview" />
+            <S.FileInput type="file" name="image" accept="image/*" onChange={handleFileChange} />
+          </S.FileInputWrapper>
 
-        <S.Label>Nome:</S.Label>
-        <S.Input type="text" name="name" value={formData.name} onChange={handleChange} />
+          <S.Label>Nome:</S.Label>
+          <S.Input type="text" name="name" value={formData.name} onChange={handleChange} />
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="metal" checked={formData.metal} onChange={handleChange} />
-          Metal
-        </S.CheckboxLabel>
+          <S.CheckboxLabel>
+            <input type="checkbox" name="metal" checked={formData.metal} onChange={handleChange} />
+            Metal
+          </S.CheckboxLabel>
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="plastic" checked={formData.plastic} onChange={handleChange} />
-          Plástico
-        </S.CheckboxLabel>
+          <S.CheckboxLabel>
+            <input type="checkbox" name="plastic" checked={formData.plastic} onChange={handleChange} />
+            Plástico
+          </S.CheckboxLabel>
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="paper" checked={formData.paper} onChange={handleChange} />
-          Papel
-        </S.CheckboxLabel>
+          <S.CheckboxLabel>
+            <input type="checkbox" name="paper" checked={formData.paper} onChange={handleChange} />
+            Papel
+          </S.CheckboxLabel>
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="glass" checked={formData.glass} onChange={handleChange} />
-          Vidro
-        </S.CheckboxLabel>
+          <S.CheckboxLabel>
+            <input type="checkbox" name="glass" checked={formData.glass} onChange={handleChange} />
+            Vidro
+          </S.CheckboxLabel>
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="organic" checked={formData.organic} onChange={handleChange} />
-          Orgânico
-        </S.CheckboxLabel>
+          <S.CheckboxLabel>
+            <input type="checkbox" name="organic" checked={formData.organic} onChange={handleChange} />
+            Orgânico
+          </S.CheckboxLabel>
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="electronic" checked={formData.electronic} onChange={handleChange} />
-          Eletrônico
-        </S.CheckboxLabel>        
+          <S.CheckboxLabel>
+            <input type="checkbox" name="electronic" checked={formData.electronic} onChange={handleChange} />
+            Eletrônico
+          </S.CheckboxLabel>
 
-        <S.ButtonWrapper>
-          <>
-          <S.Link to='/map'>Voltar</S.Link>
-          </>
-          <S.CreateButton type="submit">Criar Eco Ponto</S.CreateButton>
-        </S.ButtonWrapper>
-      </S.Form>
-    </S.CreateEcoPointWrapper>
-    <Footer/>
+          <S.ButtonWrapper>
+            <>
+              <S.Link to='/map'>Voltar</S.Link>
+            </>
+            <S.CreateButton type="submit">Criar Eco Ponto</S.CreateButton>
+          </S.ButtonWrapper>
+        </S.Form>
+      </S.CreateEcoPointWrapper>
+      <Footer />
     </>
   );
 };

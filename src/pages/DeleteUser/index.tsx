@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import * as S from './style';
 import { useNavigate, useParams } from 'react-router-dom';
-import {Header} from '../../components/Header/index';
-import {Footer} from '../../components/Footer/index';
+import { Header } from '../../components/Header/index';
+import { Footer } from '../../components/Footer/index';
 
 export const DeleteUser = () => {
   const navigate = useNavigate();
-  const user = JSON.parse(localStorage.getItem("auth.user") || "");
+  const user = JSON.parse(localStorage.getItem("auth.user") || "{}");
   const token = localStorage.getItem("auth.token");
   const [formData, setFormData] = useState<{
     userName: string;
@@ -28,12 +28,12 @@ export const DeleteUser = () => {
   // Função para lidar com a mudança do input de arquivo
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFile = e.target.files && e.target.files[0];
-  
+
     setFormData((prevData) => ({
       ...prevData,
       image: selectedFile !== undefined ? selectedFile : null,
     }));
-  
+
     if (selectedFile) {
       const reader = new FileReader();
       reader.onloadend = () => {
@@ -54,24 +54,24 @@ export const DeleteUser = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-  
+
     const formDataWithImage = new FormData();
     formDataWithImage.append('userName', formData.userName);
     formDataWithImage.append('password', formData.password);
     formDataWithImage.append('confirmPassword', formData.confirmPassword);
     formDataWithImage.append('user', user.id ?? '');
-  
+
     if (formData.image !== null) {
       formDataWithImage.append('image', formData.image);
     }
-  
+
     try {
-      const response = await axios.delete('http://localhost:3001/user/' + user.id,{
+      const response = await axios.delete('http://localhost:3001/user/' + user.id, {
         headers: {
           'Authorization': 'Bearer ' + token,
         },
       });
-      
+
       if (response.data) {
         alert('Usuário deletado com sucesso!');
         navigate(`/`);
@@ -86,29 +86,29 @@ export const DeleteUser = () => {
 
   return (
     <>
-    <S.Container>
-      <S.Title>Deletar Usuário</S.Title>
-      <S.Form onSubmit={handleSubmit}>
-            <S.UserAvatar
-              src={
-                `http://localhost:3001/upload/${user.avatar}`
-              }
-              alt="Image Preview"
-            />
-            <S.Paragraph>{formData.userName}</S.Paragraph>
-      <S.Paragraph>
-      Tem certeza que deseja <span style={{color: "var(--cancel)"}}>deletar</span> sua conta?
-      </S.Paragraph>
-      <S.Text>Senha:</S.Text>
-      <S.Input type="password" name="password" value={formData.password} onChange={handleChange} />
+      <S.Container>
+        <S.Title>Deletar Usuário</S.Title>
+        <S.Form onSubmit={handleSubmit}>
+          <S.UserAvatar
+            src={
+              `http://localhost:3001/upload/${user.avatar}`
+            }
+            alt="Image Preview"
+          />
+          <S.Paragraph>{formData.userName}</S.Paragraph>
+          <S.Paragraph>
+            Tem certeza que deseja <span style={{ color: "var(--cancel)" }}>deletar</span> sua conta?
+          </S.Paragraph>
+          <S.Text>Senha:</S.Text>
+          <S.Input type="password" name="password" value={formData.password} onChange={handleChange} />
 
-      <S.Text>Confirme a senha:</S.Text>
-      <S.Input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
-      <br/>
-      <S.Button type="submit">Deletar</S.Button><br/>
-      <S.Link to="/user">Voltar</S.Link>
-    </S.Form>
-    </S.Container>
+          <S.Text>Confirme a senha:</S.Text>
+          <S.Input type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
+          <br />
+          <S.Button type="submit">Deletar</S.Button><br />
+          <S.Link to="/user">Voltar</S.Link>
+        </S.Form>
+      </S.Container>
     </>
   );
 };

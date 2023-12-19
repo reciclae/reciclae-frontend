@@ -40,25 +40,25 @@ interface EcoPoint {
 
 export function UserProfile() {
     const token = localStorage.getItem("auth.token");
-    const user = JSON.parse(localStorage.getItem("auth.user") || "");
+    const user = JSON.parse(localStorage.getItem("auth.user") || "{}");
     const params = useParams(); // Obtém o ID do usuário da URL
     const [ecoPoints, setEcoPoints] = useState<EcoPoint[]>([]);
     const [maxHeight, setMaxHeight] = useState(300);
 
     const fetchData = async () => {
         try {
-          const response = await axios.get<EcoPoint[]>('http://localhost:3001/userecopoint/' + user.id, {
-            headers: {
-              'Authorization': 'Bearer ' + token
-            },
-          });
-          setEcoPoints(Object.values(response.data));
+            const response = await axios.get<EcoPoint[]>('http://localhost:3001/userecopoint/' + user.id, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                },
+            });
+            setEcoPoints(Object.values(response.data));
         } catch (error) {
-          console.error('Erro ao buscar os pontos: ', error);
+            console.error('Erro ao buscar os pontos: ', error);
         }
     }
-    
-      useEffect(() => {
+
+    useEffect(() => {
         fetchData();
     }, []);
 
@@ -142,7 +142,7 @@ export function UserProfile() {
                     <TextEmail>
                         {user.email}
                     </TextEmail>
-                    <BtnEdit to="/user/edit"> 
+                    <BtnEdit to="/user/edit">
                         Editar Perfil
                     </BtnEdit>
                     <BtnDelete to="/user/delete">
@@ -167,7 +167,7 @@ export function UserProfile() {
                                     image={`http://localhost:3001/upload/${ecoPoint.image}`}
                                     name={ecoPoint.name}
                                     tipo={"teste"}
-                                    // tipo={item.tipo} listar todos os tipos.
+                                // tipo={item.tipo} listar todos os tipos.
 
                                 />
                             ))}

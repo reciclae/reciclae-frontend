@@ -26,7 +26,7 @@ interface EcoPoint {
 export const EditPoint: React.FC = () => {
   // Obtenha os parâmetros da URL usando useParams
   const { id } = useParams();
-  const user = JSON.parse(localStorage.getItem("auth.user") || "");
+  const user = JSON.parse(localStorage.getItem("auth.user") || "{}");
   const [ecoPoint, setEcoPoint] = useState<EcoPoint>({
     _id: '',
     name: '',
@@ -59,7 +59,7 @@ export const EditPoint: React.FC = () => {
   useEffect(() => {
     fetchData();
   }, []);
-  
+
   // Defina o estado inicial com os dados do ponto
   const [formData, setFormData] = useState<{
     name: string;
@@ -184,34 +184,34 @@ export const EditPoint: React.FC = () => {
           <S.Input type="text" name="name" value={formData.name} onChange={handleChange} />
 
           <S.CheckboxLabel>
-          <input type="checkbox" name="metal" checked={formData.metal} onChange={handleChange} />
-          Metal
-        </S.CheckboxLabel>
+            <input type="checkbox" name="metal" checked={formData.metal} onChange={handleChange} />
+            Metal
+          </S.CheckboxLabel>
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="plastic" checked={formData.plastic} onChange={handleChange} />
-          Plástico
-        </S.CheckboxLabel>
+          <S.CheckboxLabel>
+            <input type="checkbox" name="plastic" checked={formData.plastic} onChange={handleChange} />
+            Plástico
+          </S.CheckboxLabel>
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="paper" checked={formData.paper} onChange={handleChange} />
-          Papel
-        </S.CheckboxLabel>
+          <S.CheckboxLabel>
+            <input type="checkbox" name="paper" checked={formData.paper} onChange={handleChange} />
+            Papel
+          </S.CheckboxLabel>
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="glass" checked={formData.glass} onChange={handleChange} />
-          Vidro
-        </S.CheckboxLabel>
+          <S.CheckboxLabel>
+            <input type="checkbox" name="glass" checked={formData.glass} onChange={handleChange} />
+            Vidro
+          </S.CheckboxLabel>
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="organic" checked={formData.organic} onChange={handleChange} />
-          Orgânico
-        </S.CheckboxLabel>
+          <S.CheckboxLabel>
+            <input type="checkbox" name="organic" checked={formData.organic} onChange={handleChange} />
+            Orgânico
+          </S.CheckboxLabel>
 
-        <S.CheckboxLabel>
-          <input type="checkbox" name="electronic" checked={formData.electronic} onChange={handleChange} />
-          Eletrônico
-        </S.CheckboxLabel>
+          <S.CheckboxLabel>
+            <input type="checkbox" name="electronic" checked={formData.electronic} onChange={handleChange} />
+            Eletrônico
+          </S.CheckboxLabel>
 
           <S.ButtonWrapper>
             <S.Link to={`/user`}>Voltar</S.Link>

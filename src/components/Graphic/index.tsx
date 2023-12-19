@@ -3,7 +3,7 @@ import ReactApexChart from 'react-apexcharts';
 import ApexCharts from 'apexcharts';
 import axios from 'axios';
 
-interface GraphicProps {}
+interface GraphicProps { }
 
 interface EcoPoint {
     metal: number;
@@ -16,7 +16,7 @@ interface EcoPoint {
 
 const Graphic: React.FC<GraphicProps> = () => {
     const token = localStorage.getItem("auth.token");
-    const user = JSON.parse(localStorage.getItem("auth.user") || "");
+    const user = JSON.parse(localStorage.getItem("auth.user") || "{}");
     const [ecoPoints, setEcoPoints] = useState<EcoPoint>({
         metal: 0,
         plastic: 0,
@@ -25,15 +25,15 @@ const Graphic: React.FC<GraphicProps> = () => {
         organic: 0,
         electronic: 0,
     });
-    
+
     const fetchData = async () => {
         try {
-          const response = await axios.get<EcoPoint>('http://localhost:3001/graphicpoints');
-          setEcoPoints(response.data);
+            const response = await axios.get<EcoPoint>('http://localhost:3001/graphicpoints');
+            setEcoPoints(response.data);
         } catch (error) {
-          console.error('Erro ao buscar os pontos: ', error);
+            console.error('Erro ao buscar os pontos: ', error);
         }
-    }    
+    }
 
     useEffect(() => {
         fetchData();

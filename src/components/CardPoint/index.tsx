@@ -6,6 +6,7 @@ import axios from 'axios';
 
 import ImgEdit from "../../assets/edit-point.svg"
 import ImgDelete from "../../assets/delete-point.svg"
+import { useNavigate } from 'react-router-dom';
 
 import {
     Container,
@@ -29,9 +30,12 @@ interface CardPointProps {
     image: string;
     name: string;
     tipo: string;
+    id: string
 }
 
-export function CardPoint({ image, name, tipo }: CardPointProps) {
+export function CardPoint({ image, name, tipo, id }: CardPointProps) {
+    const navigate = useNavigate();
+    console.log("card Id" + id)
     return (
         <Container>
 
@@ -47,10 +51,10 @@ export function CardPoint({ image, name, tipo }: CardPointProps) {
                     <Text>{tipo}</Text>
                 </BoxInfo>
                 <BoxButon>
-                    <BtnEdit>
+                    <BtnEdit onClick={() => { navigate(`/point/edit/${id}`); }}>
                         <ImgButon src={ImgEdit} />
                     </BtnEdit>
-                    <BtnDelete>
+                    <BtnDelete onClick={() => { navigate(`/point/delete/${id}`); }} >
                         <ImgButon src={ImgDelete} />
                     </BtnDelete>
                 </BoxButon>

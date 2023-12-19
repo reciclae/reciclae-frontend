@@ -122,7 +122,7 @@ export const BtnEdit = styled(RouterLink)`
 
 
 
-export const BtnDelete = styled(RouterLink)`
+export const BtnDelete = styled.button`
     display: flex;
     background-color:var(--cancel);
     color:var(--bright);

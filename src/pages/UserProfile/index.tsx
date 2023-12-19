@@ -7,6 +7,9 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
+import { useNavigate } from 'react-router-dom';
+
+
 
 import {
     Container,
@@ -25,7 +28,7 @@ import {
 } from "./style";
 
 interface EcoPoint {
-    id: string;
+    _id: string;
     name: string;
     latitude: string;
     longitude: string;
@@ -43,7 +46,7 @@ export function UserProfile() {
     const user = JSON.parse(localStorage.getItem("auth.user") || "{}");
     const params = useParams(); // Obtém o ID do usuário da URL
     const [ecoPoints, setEcoPoints] = useState<EcoPoint[]>([]);
-    const [maxHeight, setMaxHeight] = useState(300);
+    const navigate = useNavigate();
 
     const fetchData = async () => {
         try {
@@ -63,67 +66,17 @@ export function UserProfile() {
     }, []);
 
 
-    // const [userData, setUserData] = useState<any>({});
-
-    // Função para buscar os dados do usuário
-    // const fetchUserData = async () => {
-    //     try {
-    //         const response = await axios.get(`http://localhost:3001//users/${params.id}`, {
-    //             headers: {
-    //                 // O token tem que vir abaixo.
-    //                 'Authorization': 'Bearer ' + token
-    //             },
-    //         });
-    //         setUserData(response.data);
-    //         console.log(response.data)
-    //     } catch (error) {
-    //         console.error('Erro ao fazer a requisição:', error);
-    //         alert('Erro ao carregar os dados do usuário. Tente novamente mais tarde.');
-    //     }
-    // };
-
-    // useEffect(() => {
-    //     fetchUserData();
-    // }, []);
 
 
     // variavel teste
     const imgWeb = "https://www.posgraduacaounincor.com.br/assets/Unincor/images/sem-imagem.jpg"
 
 
-    const [items, setItems] = useState([
-        {
-            id: 1,
-            image: imgWeb,
-            name: "Item 1",
-            tipo: "Este é o item 1.",
-        },
-        {
-            id: 2,
-            image: imgWeb,
-            name: "Item 2",
-            tipo: "Este é o item 2.",
-        },
-        {
-            id: 3,
-            image: imgWeb,
-            name: "Item 2",
-            tipo: "Este é o item 2.",
-        },
-        {
-            id: 4,
-            image: imgWeb,
-            name: "Item 2",
-            tipo: "Este é o item 2.",
-        },
-    ]);
-
-
     /**
      * Rota delete user /user/delete/${user.id}
      * Rota delete point /point/delete/:id
      */
-
+    ecoPoints.map((ecoPoint, index) => (console.log(ecoPoint)))
     return (
         <Container>
             <Header />
@@ -145,7 +98,7 @@ export function UserProfile() {
                     <BtnEdit to="/user/edit">
                         Editar Perfil
                     </BtnEdit>
-                    <BtnDelete to="/user/delete">
+                    <BtnDelete onClick={() => { navigate(`/user/delete/${user.id}`); }}>
                         Excluir Conta
                     </BtnDelete>
 
@@ -162,11 +115,14 @@ export function UserProfile() {
                     <BoxPoints>
                         <ul>
                             {ecoPoints.map((ecoPoint, index) => (
+
                                 <CardPoint
                                     key={index}
+                                    id={ecoPoint._id}
                                     image={`http://localhost:3001/upload/${ecoPoint.image}`}
                                     name={ecoPoint.name}
                                     tipo={"teste"}
+
                                 // tipo={item.tipo} listar todos os tipos.
 
                                 />

@@ -64,6 +64,7 @@ export const Button = styled.button`
   color: var(--bright);
   background-color: var(--cancel);
   cursor: pointer;
+  margin: 10px;
 `;
 
 export const Link = styled(RouterLink)`

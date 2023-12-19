@@ -152,7 +152,7 @@ export const EditPoint: React.FC = () => {
       if (response.data) {
         alert('Eco ponto atualizado com sucesso!');
         // Redirecionar para a página de detalhes do ponto ou outra página após a edição
-        navigation(`/ecopoint/${id}`);
+        navigation(`/user`);
       } else {
         alert('Falha ao editar o eco ponto. Por favor, tente novamente.');
       }

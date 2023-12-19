@@ -49,9 +49,9 @@ export const Input = styled.input`
 `;
 
 export const Button = styled.button`
-  padding: .5em 5em;
+  padding: .5em 5.3em;
   border-radius: .5em;
-  margin: 0 auto;
+  margin: 10px;
   color: var(--bright);
   background-color: var(--cancel);
   cursor: pointer;
@@ -60,7 +60,7 @@ export const Button = styled.button`
 export const Link = styled(RouterLink)`
   padding: .5em 5.3em;
   border-radius: .5em;
-  margin: 0 auto;
+  
   color: var(--bright);
   background-color: #000000;
   cursor: pointer;

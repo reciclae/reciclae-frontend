@@ -69,7 +69,6 @@ export const Button = styled.button`
 export const Link = styled(RouterLink)`
   padding: .5em 5.3em;
   border-radius: .5em;
-  
   color: var(--bright);
   background-color: #000000;
   cursor: pointer;

@@ -77,22 +77,22 @@ export const DeletePoint: React.FC = () => {
     <>
       <S.Container>
         <S.Title>Deletar ponto</S.Title>
-        <S.Form>
-              <S.PointPicture
-                src={
-                  `http://localhost:3001/upload/${ecoPoint.image}`
-                }
-                alt="Image Preview"
-              />
-              <label>{ecoPoint.name}</label>
-          </S.Form>
-        <S.Paragraph>
-          Tem certeza que deseja apagar esse ponto?
-        </S.Paragraph>
-        <S.Form>
-          <S.Button onClick={handleDelete}>Deletar</S.Button>
-        </S.Form><br />
-        <S.Link to="/user">Voltar</S.Link>
+        <S.Form onSubmit={handleDelete}>
+          <S.PointPicture
+            src={
+              `http://localhost:3001/upload/${ecoPoint.image}`
+            }
+            alt="Image Preview"
+            />
+          <label>{ecoPoint.name}</label>
+            
+          <S.Paragraph>
+            Tem certeza que deseja apagar esse ponto?
+          </S.Paragraph>
+          
+          <S.Button type="submit">Deletar</S.Button>
+          <S.Link to="/user">Voltar</S.Link>
+        </S.Form>
       </S.Container>
     </>
   )

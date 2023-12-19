@@ -24,6 +24,7 @@ export const Main = styled.main`
 
 export const GraphicContainer = styled.section`
   width:100%;
+  padding-right: 1rem;
 
 `;
 
@@ -34,7 +35,7 @@ export const TextContainer = styled.section`
   width: 100%;
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  padding-left: 1rem;
   flex-direction: column;
 `;
 

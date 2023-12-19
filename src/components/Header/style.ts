@@ -47,7 +47,9 @@ export const Logout = styled.button`
 `;
 
 export const UserPicture = styled.img`
-  width: 2rem;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 1rem;
 `;
 
 export const Signup = styled(RouterLink)``;

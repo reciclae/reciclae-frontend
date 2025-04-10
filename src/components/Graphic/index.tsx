@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactApexChart from 'react-apexcharts';
 import ApexCharts from 'apexcharts';
-import axios from 'axios';
+import { api } from '../../api/index';
 
 interface GraphicProps { }
 
@@ -28,7 +28,7 @@ const Graphic: React.FC<GraphicProps> = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get<EcoPoint>('http://localhost:3001/graphicpoints');
+            const response = await api.get<EcoPoint>('/graphicpoints');
             setEcoPoints(response.data);
         } catch (error) {
             console.error('Erro ao buscar os pontos: ', error);

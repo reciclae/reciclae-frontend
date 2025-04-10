@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import * as S from './style';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../../components/Header/index';
+import { api } from '../../api/index';
 
 export const EditUser = () => {
   const navigate = useNavigate();
@@ -65,7 +65,7 @@ export const EditUser = () => {
     }
 
     try {
-      const response = await axios.put('http://localhost:3001/user/' + user.id, formDataWithImage, {
+      const response = await api.put('/user/' + user.id, formDataWithImage, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': 'Bearer ' + token,
@@ -92,7 +92,7 @@ export const EditUser = () => {
           <S.Title>Atualizar usuário</S.Title>
 
           <S.FileInputWrapper>
-            <S.ImagePreview src={imagePreview ?? `http://localhost:3001/upload/${user.avatar}`} alt="Image Preview" />
+            <S.ImagePreview src={imagePreview ?? `${process.env.REACT_APP_API_URL}/upload/${user.avatar}`} alt="Image Preview" />
             <S.FileInput type="file" name="image" accept="image/*" onChange={handleFileChange} />
           </S.FileInputWrapper>
 

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import * as S from './style';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../../components/Header/index';
 import { Footer } from '../../components/Footer/index';
+import { api } from '../../api/index';
 
 export const DeleteUser = () => {
   const navigate = useNavigate();
@@ -66,7 +66,7 @@ export const DeleteUser = () => {
     }
 
     try {
-      const response = await axios.delete('http://localhost:3001/user/' + user.id, {
+      const response = await api.delete('/user/' + user.id, {
         headers: {
           'Authorization': 'Bearer ' + token,
         },
@@ -91,7 +91,7 @@ export const DeleteUser = () => {
         <S.Form onSubmit={handleSubmit}>
           <S.UserAvatar
             src={
-              `http://localhost:3001/upload/${user.avatar}`
+              `${process.env.REACT_APP_API_URL}/upload/${user.avatar}`
             }
             alt="Image Preview"
           />

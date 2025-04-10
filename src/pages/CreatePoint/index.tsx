@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-import axios from 'axios';
 import * as S from './style';
 import { useNavigate, useParams } from 'react-router-dom';
 import { Header } from '../../components/Header/index';
+import { api } from '../../api/index';
 
 export const CreatePoint = () => {
   const navigate = useNavigate();
@@ -83,7 +83,7 @@ export const CreatePoint = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:3001/ecopoint', formDataWithImage, {
+      const response = await api.post('/ecopoint', formDataWithImage, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': 'Bearer ' + token,

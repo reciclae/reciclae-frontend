@@ -5,7 +5,7 @@ import imgUser from "../../assets/imgUser.png";
 import { CardPoint } from "../../components/CardPoint";
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import { api } from '../../api/index';
 
 import { useNavigate } from 'react-router-dom';
 
@@ -52,7 +52,7 @@ export function UserProfile() {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get<EcoPoint[]>('http://localhost:3001/userecopoint/' + user.id, {
+            const response = await api.get<EcoPoint[]>('/userecopoint/' + user.id, {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 },
@@ -95,7 +95,7 @@ export function UserProfile() {
                 <UserContainer>
 
                     <UserPicture
-                        src={`http://localhost:3001/upload/${user.avatar}` || imgUser}
+                        src={`${process.env.REACT_APP_API_URL}/upload/${user.avatar}` || imgUser}
                         alt="Foto do usuário"
                         title="Foto do usuário"
                     />
@@ -130,7 +130,7 @@ export function UserProfile() {
                                 <CardPoint
                                     key={index}
                                     id={ecoPoint._id}
-                                    image={`http://localhost:3001/upload/${ecoPoint.image}`}
+                                    image={`${process.env.REACT_APP_API_URL}/upload/${ecoPoint.image}`}
                                     name={ecoPoint.name}
                                     tipo={getTiposString(ecoPoint)}
 

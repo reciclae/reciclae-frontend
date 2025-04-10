@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as S from './style';
+import { api } from '../../api/index';
 
 interface EcoPoint {
   _id: string;
@@ -38,7 +38,7 @@ export const DeletePoint: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<EcoPoint>(`http://localhost:3001/ecopoint/${id}`, {
+      const response = await api.get<EcoPoint>(`/ecopoint/${id}`, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -57,7 +57,7 @@ export const DeletePoint: React.FC = () => {
     e.preventDefault();
     
     try {
-      const response = await axios.delete(`http://localhost:3001/ecopoint/${id}`, {
+      const response = await api.delete(`/ecopoint/${id}`, {
         headers: {
           Authorization: 'Bearer ' + token,
         },
@@ -82,7 +82,7 @@ export const DeletePoint: React.FC = () => {
         <S.Form onSubmit={handleDelete}>
           <S.PointPicture
             src={
-              `http://localhost:3001/upload/${ecoPoint.image}`
+              `${process.env.REACT_APP_API_URL}/upload/${ecoPoint.image}`
             }
             alt="Image Preview"
             />

@@ -1,8 +1,8 @@
 import { Header, Footer } from "../../components";
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import ImgRoute from "../../assets/route.png"
+import { api } from '../../api/index';
 import {
   Container,
   Title,
@@ -50,7 +50,7 @@ export function SelectPoint() {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<EcoPoint>('http://localhost:3001/ecopoint/' + id, {
+      const response = await api.get<EcoPoint>('/ecopoint/' + id, {
         headers: {
           'Authorization': 'Bearer ' + token
         },
@@ -73,7 +73,7 @@ export function SelectPoint() {
       <Box>
         <BoxInfo>
 
-          <ImgPoint src={`http://localhost:3001/upload/${ecoPoint.image}` ?? imgWeb}
+          <ImgPoint src={`${process.env.REACT_APP_API_URL}/upload/${ecoPoint.image}` ?? imgWeb}
             alt="Foto do Ponto"
             title="Foto do usuário" />
           <Title>{ecoPoint.name}</Title>

@@ -40,7 +40,7 @@ export function Header() {
               </UserTextContainer>
               <Link to="/user">
                 <UserPicture
-                  src={`http://localhost:3001/upload/${user.avatar}`}
+                  src={`${process.env.REACT_APP_API_URL}/upload/${user.avatar}`}
                   alt="Foto do usuário"
                   title="Foto do usuário"
                 />

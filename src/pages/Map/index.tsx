@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, useJsApiLoader, Marker, InfoWindow } from '@react-google-maps/api';
-import { Header } from "../../components/Header/index";
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Header } from "../../components/Header/index";
+import { api } from '../../api/index';
 
 interface EcoPoint {
   id: string;
@@ -32,7 +32,7 @@ export const Map = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<EcoPoint[]>('http://localhost:3001/ecopoints/public');
+      const response = await api.get<EcoPoint[]>('/ecopoints/public');
       setEcoPoints(response.data);
     } catch (error) {
       console.error('Erro ao buscar os pontos: ', error);

@@ -1,11 +1,11 @@
 // Importe as dependências necessárias
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
 import * as S from './style';
 import { Header } from '../../components/Header/index';
 import { Footer } from '../../components/Footer/index';
 import { stringify } from 'querystring';
+import { api } from '../../api/index';
 
 // Defina a interface para os parâmetros da URL
 
@@ -45,7 +45,7 @@ export const EditPoint: React.FC = () => {
 
   const fetchData = async () => {
     try {
-      const response = await axios.get<EcoPoint>('http://localhost:3001/ecopoint/' + id, {
+      const response = await api.get<EcoPoint>('/ecopoint/' + id, {
         headers: {
           'Authorization': 'Bearer ' + token
         },
@@ -142,7 +142,7 @@ export const EditPoint: React.FC = () => {
     }
     console.log(formData.image);
     try {
-      const response = await axios.put('http://localhost:3001/ecopoint/' + id, formDataWithImage, {
+      const response = await api.put('/ecopoint/' + id, formDataWithImage, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': 'Bearer ' + token,
@@ -173,7 +173,7 @@ export const EditPoint: React.FC = () => {
             <S.ImagePreview
               src={
                 imagePreview ??
-                `http://localhost:3001/upload/${ecoPoint.image}`
+                `${process.env.REACT_APP_API_URL}/upload/${ecoPoint.image}`
               }
               alt="Image Preview"
             />

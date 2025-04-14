@@ -73,7 +73,7 @@ export const Map = () => {
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyB-GKZUSQhzaWFa7HhCP76UqGfduzVeJB0"
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY as string
   });
 
   return isLoaded ? (
